@@ -3,9 +3,8 @@ extends ./layout.jade
 block body
 	div.welcome-container
 		div.welcome
-			//- img(src=pagecontent.getImage('page.image').url, class='star')
-			//-marquee(behavior="alternate")
-			h1 !{pagecontent.getStructuredText('page.title').asText(ctx.linkResolver)}
+			img(src='/images/square_logo.svg', class='logo')
+
 			h2 !{pagecontent.getStructuredText('page.description').asText(ctx.linkResolver)}
 
 			div.contact
