@@ -5,7 +5,8 @@ block body
 		div.welcome
 			img(src='/images/square_logo.svg', class='logo')
 
-			h2 !{pagecontent.getStructuredText('page.description').asText(ctx.linkResolver)}
+			h1 !{pagecontent.getStructuredText('page.description').asText(ctx.linkResolver)}
+			h2 We craft well-designed and tangible computational things.
 
 			div.contact
 				!{pagecontent.getStructuredText('page.contact').asHtml(ctx.linkResolver)}
