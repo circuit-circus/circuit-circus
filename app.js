@@ -33,22 +33,28 @@ app.use(session({secret: '1234', saveUninitialized: true, resave: true}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(errorHandler());
-
-
-function handleError(err, req, res) {
-	if (err.status == 404) {
-		res.status(404).send("404 not found");
-	} else {
-		res.status(500).send("Error 500: " + err.message);
-	}
-}
 
 // Routes
 app.route('/').get(function(req, res) {
 	res.render('index');
 });
 
+// error handling
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    var err = [];
+    err.message = 'Not found';
+    err.status = 404;
+    next(err);
+});
+// general error handling
+app.use(function (err, req, res, next) {
+	if (err.status == 404) {
+		res.status(404).render('error', {error: err});
+	} else {
+		res.status(500).render('error', {error: err});
+	}
+});
 
 var PORT = app.get('port');
 
