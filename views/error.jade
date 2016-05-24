@@ -1,5 +1,10 @@
 extends ./layout.jade
 
 block body
-	div.error
-		p Hej
+	div.page-container.error
+		section.page-content.error-content
+			h1= error.status + ' | ' + error.message
+			h2 😢 😢 😢
+
+			a(href="/")
+				| Back to frontpage
