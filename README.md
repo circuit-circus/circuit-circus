@@ -4,7 +4,7 @@
   
 
 #### Update May 24 ####
-Removed develop branch (was a mess anyway), in order to start fresh and use Git Flow for features n stuff, rather than random cluttered work on develop.  
+Removed old develop branch (was a mess anyway), in order to start fresh and use Git Flow for features n stuff, rather than random cluttered work on develop.  
 
 
 ## Repo structure 🌲🌳 ##
