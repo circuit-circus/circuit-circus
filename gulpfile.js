@@ -1,36 +1,44 @@
-var gulp         = require('gulp'),
-    less         = require('gulp-less'),
-    autoprefixer = require('gulp-autoprefixer'),
-    minifycss    = require('gulp-minify-css'),
-    rename       = require('gulp-rename'),
-    notify       = require('gulp-notify'),
-    cache        = require('gulp-cache'),
-    livereload   = require('gulp-livereload'),
-    lr           = require('tiny-lr'),
-    server       = lr(),
-    sourcemaps   = require('gulp-sourcemaps'),
-    concat       = require('gulp-concat'),
-    uglify       = require('gulp-uglify');
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var prefix = require('gulp-autoprefixer');
+var minify = require('gulp-minify-css');
+var minifyjs = require('gulp-minify');
+var notify = require('gulp-notify');
+var livereload = require('gulp-livereload');
+var lr = require('tiny-lr');
+var server = lr();
 
-gulp.task('styles', function () {
-    return gulp.src('public/less/style.less')
-        .pipe(less({style : 'expanded', compass : true}))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(minifycss({compatibility : 'ie9'}))
-        .pipe(gulp.dest('public/stylesheets/'))
+var port = 35729;
+
+// Compile sass and move it
+gulp.task('minify-css', function() {
+    gulp.src('public/src/scss/**/*.scss')
+        .pipe(sass()
+            .on('error', notify.onError('Error: <%= error.message %>'))
+        )
+        .pipe(prefix('last 5 versions'))
+        .pipe(minify())
         .pipe(livereload(server))
-        .pipe(notify({message : 'Styles task complete'}));
+        .pipe(gulp.dest('public/'))
 });
 
-
-gulp.task('default', function () {
-    gulp.start('watch');
+// Compress the javascript and move it
+gulp.task('compress-js', function() {
+    gulp.src('public/src/js/*.js')
+        .pipe(minifyjs({
+            exclude: ['tasks'],
+            ignoreFiles: ['.combo.js', '-min.js']
+            })
+            .on('error', notify.onError('Error: <%= error.message %>'))
+        )
+        .pipe(gulp.dest('public/'))
 });
 
-
-gulp.task('watch', function () {
-
+//Watch task
+gulp.task('default',function() {
     livereload.listen();
-    // Watch .less files
-    gulp.watch('public/less/**/*.less', ['styles']);
+    gulp.start('minify-css');
+    gulp.start('compress-js');
+    gulp.watch('public/src/scss/**/*.scss',['minify-css']);
+    gulp.watch('public/src/js/**/*.js', ['compress-js']);
 });

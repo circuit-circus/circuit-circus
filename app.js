@@ -1,63 +1,33 @@
-
-/**
- * Module dependencies.
- */
-
-var express = require('express'),
-favicon = require('serve-favicon'),
-logger = require('morgan'),
-cookieParser = require('cookie-parser'),
-bodyParser = require('body-parser'),
-methodOverride = require('method-override'),
-session = require('express-session'),
-errorHandler = require('errorhandler'),
-http = require('http'),
-path = require('path');
-
+var express = require('express');
 var app = express();
+var ejsLayouts = require("express-ejs-layouts");
+var favicon = require('serve-favicon');
 
-// all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', (process.env.PORT || 5000));
 
-// view engine
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.use(express.static(__dirname + '/public'));
+app.use(ejsLayouts);
+app.use(favicon('favicon.png'));
 
-app.use(favicon("public/images/punch.png"));
-
-app.use(logger('dev'));
-app.use(bodyParser());
-app.use(methodOverride());
-app.use(cookieParser('1234'));
-app.use(session({secret: '1234', saveUninitialized: true, resave: true}));
-
-app.use(express.static(path.join(__dirname, 'public')));
-
+// views is directory for all template files
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 // Routes
 app.route('/').get(function(req, res) {
 	res.render('index');
 });
 
-// error handling
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = [];
-    err.message = 'Not found';
-    err.status = 404;
-    next(err);
-});
 // general error handling
 app.use(function (err, req, res, next) {
 	if (err.status == 404) {
+        console.log(err);
 		res.status(404).render('error', {error: err});
 	} else {
 		res.status(500).render('error', {error: err});
 	}
 });
 
-var PORT = app.get('port');
-
-app.listen(PORT, function() {
-	console.log('Express server listening on port ' + PORT);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
