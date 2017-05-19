@@ -39,7 +39,6 @@ h2 {
 }
 
 a {
-    letter-spacing: 1px;
     text-decoration: none;
     color: #fff;
 }
@@ -101,7 +100,6 @@ a:hover {
             color: #fff;
             letter-spacing: 2px;
 
-
             &:hover {
                 text-decoration: none;
             }
@@ -124,7 +122,7 @@ a:hover {
     }
 
     .playmates-container {
-        margin: 2rem;
+        margin: 2rem 0;
         width: 100%;
 
         @media screen and (min-width: 480px) {
@@ -150,11 +148,16 @@ a:hover {
             background-position: center center;
             display: inline-block;
             vertical-align: top;
+            transition: transform 0.2s ease;
 
             @media screen and (min-width: 480px) {
                 margin: 0 1rem;
                 width: calc(20% - 2rem - 3px);
                 padding-bottom: calc(15% - 1rem);
+            }
+
+            &:hover {
+                transform: scale(1.1);
             }
         }
     }
