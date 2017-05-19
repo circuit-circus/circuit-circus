@@ -124,27 +124,26 @@ a:hover {
     }
 
     .playmates-container {
-        margin: 2rem 0;
+        margin: 2rem;
         width: 100%;
 
         @media screen and (min-width: 480px) {
-            margin: 4rem 0;
+            margin: 4rem 0 2rem;
         }
 
         h3 {
-            margin-bottom: 1rem;
-            background-color: #fff;
+            margin-bottom: 1.5rem;
             color: blue;
-            padding: 4px;
 
-            @media screen and (min-width: 480px) {
-                margin-bottom: 2rem;
+            span {
+                background-color: #fff;
+                padding: 4px 8px;
             }
         }
 
         .playmate-item {
             width: calc(20% - 0.5rem - 3px);
-            padding-bottom: calc(15% - 0.5rem);
+            padding-bottom: calc(12% - 0.5rem);
             margin: 0 0.25rem;
             background-size: contain;
             background-repeat: no-repeat;
