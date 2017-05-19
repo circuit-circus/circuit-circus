@@ -4,9 +4,10 @@
 
 ✨ 🎪 🎪 🎪 ✨
 
-  
+### Update May 19 2017 ###
+Rewrote the site using EJS and SCSS instead of Jade and LESS
 
-#### Update May 24 ####
+#### Update May 24 2016 ####
 Removed old develop branch (was a mess anyway), in order to start fresh and use Git Flow for features n stuff, rather than random cluttered work on develop.  
 
 
@@ -31,13 +32,13 @@ quick and dirty fixes, merges directly to both develop and master
 ## App info 👌✨️##
 
 We use [ExpressJS](http://expressjs.com/).  
- [Jade](http://jade-lang.com/) is used for templating.
+ [EJS](http://www.embeddedjs.com/) is used for templating.
 
 ### Setting up the project ###
 - Download the repo, navigate to it, and run *npm install* in the terminal  
 (make sure you have node installed first)
 
-- To start the server, run *nodemon* in the terminal. Navigate to *http://localhost:3000/* and everything should be working 🙏   
+- To start the server, run *nodemon* in the terminal. Navigate to *http://localhost:5000/* and everything should be working 🙏   
  
-Less is used as our css pre-processor. To compile it, run *gulp* in the terminal.  
+Scss is used as our css pre-processor. To compile it, run *gulp* in the terminal.  
 I recommend installing the [Livereload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei) Chrome plugin, which works with the gulp task.
