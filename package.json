@@ -1,6 +1,10 @@
 {
   "name": "circuit-circus",
   "version": "0.0.2",
+  "description": "Website of interaction design collective Circuit Circus",
+  "engines": {
+    "node": "6.11.1"
+  },
   "private": true,
   "scripts": {
     "start": "node app.js"
