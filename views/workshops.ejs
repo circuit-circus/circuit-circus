@@ -1,7 +1,10 @@
-Workshops
+<h1>Workshops</h1>
 
 <% workshops.forEach(function(workshop) { %>
-    <%= workshop.fields.title %>
-    <%= workshop.fields.leadParagraph %>
-    <%= workshop.fields.bodyText %>
+    <article>
+        <h1><%= workshop.fields.title %></h1>
+
+        <p class="strong"><%= workshop.fields.leadParagraph %></p>
+        <p><%= workshop.fields.bodyText %></p>
+    </article>
 <% }); %>

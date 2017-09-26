@@ -1,7 +1,10 @@
-Projects
+<h1>Projects</h1>
 
 <% projects.forEach(function(project) { %>
-    <%= project.fields.title %>
-    <%= project.fields.leadParagraph %>
-    <%= project.fields.bodyText %>
+    <article>
+        <h1><%= project.fields.title %></h1>
+
+        <p class="strong"><%= project.fields.leadParagraph %></p>
+        <p><%= project.fields.bodyText %></p>
+    </article>
 <% }); %>
