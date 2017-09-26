@@ -37,6 +37,24 @@ app.route('/projects').get(function(req, res) {
     });
 });
 
+app.param('slug', function (req, res, next, slug) {
+    var query = {
+        'content_type' : 'project',
+        'fields.slug' : slug
+    }
+
+    client.getEntries(query).then(function(project) {
+        req.project = project.items[0];
+        next();
+    }).catch(function(error) {
+        console.log(error);
+    });
+})
+
+app.route('/projects/:slug').get(function(req, res) {
+    res.render('projects-single', {project: req.project});
+});
+
 app.route('/workshops').get(function(req, res) {
     client.getEntries({
         'content_type': 'workshop'
