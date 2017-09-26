@@ -48,7 +48,7 @@ app.route('/workshops').get(function(req, res) {
 
 // general error handling
 app.use(function (err, req, res, next) {
-        console.log(err);
+    console.log(err);
 	if (err.status == 404) {
 		res.status(404).render('error', {error: err});
 	} else {
