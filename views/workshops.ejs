@@ -1,0 +1,11 @@
+<div class="page-container">
+    <div class="page-content">
+        <h1>Workshops</h1>
+
+        <% workshops.forEach(function(workshop) { %>
+            <h2><%= workshop.fields.title %></h2>
+            <p class="strong"><%= workshop.fields.leadParagraph %></p>
+            <p class="strong"><%= workshop.fields.bodyText %></p>
+        <% }); %>
+    </div>
+</div>

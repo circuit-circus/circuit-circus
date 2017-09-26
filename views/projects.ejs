@@ -1,0 +1,11 @@
+<div class="page-container">
+    <div class="page-content">
+        <h1>Projects</h1>
+
+        <% projects.forEach(function(project) { %>
+            <h2><%= project.fields.title %></h2>
+            <p class="strong"><%= project.fields.leadParagraph %></p>
+            <p class="strong"><%= project.fields.bodyText %></p>
+        <% }); %>
+    </div>
+</div>
