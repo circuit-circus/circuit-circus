@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
         'content_type': 'workshop'
     })
     .then(function (entries) {
-        res.render('workshops', { workshops: entries.items });
+        res.render('pages/workshops', { workshops: entries.items });
     });
 });
 
@@ -26,7 +26,7 @@ router.param('slug', function (req, res, next, slug) {
 })
 
 router.get('/:slug', function(req, res, next) {
-    res.render('workshops-single', {workshop: req.project});
+    res.render('pages/workshops-single', {workshop: req.project});
 });
 
 module.exports = router;
