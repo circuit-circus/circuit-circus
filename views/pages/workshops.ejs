@@ -1,12 +1,13 @@
-<h1>Workshops</h1>
 
-<% workshops.forEach(function(workshop) { %>
-    <article>
-        <h1><a href="/workshops/<%= workshop.fields.slug %>">
-            <%= workshop.fields.title %>
-        </a></h1>
+<div id="workshops-page">
+    <% workshops.forEach(function(workshop) { %>
+        <article>
+            <h1><a href="/workshops/<%= workshop.fields.slug %>">
+                <%= workshop.fields.title %>
+            </a></h1>
 
-        <p class="strong"><%= workshop.fields.leadParagraph %></p>
-        <p><%= workshop.fields.bodyText %></p>
-    </article>
-<% }); %>
+            <p class="strong"><%= workshop.fields.leadParagraph %></p>
+            <p><%= workshop.fields.bodyText %></p>
+        </article>
+    <% }); %>
+</div>

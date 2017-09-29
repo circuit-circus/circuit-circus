@@ -1,0 +1,19 @@
+nav {
+    text-align: center;
+    padding: 1rem;
+
+    #nav-logo {
+        width: 100px;
+        height: 100px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .nav-item {
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 12px;
+        padding: 0.5rem;
+    }
+}

@@ -6,7 +6,7 @@
 
         <!-- <link rel="stylesheet" type="text/css" href="/reset.css"> -->
         <link rel="stylesheet" type="text/css" href="/style.css">
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700,900" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script language="javascript" type="text/javascript" src="/main.js"></script>
 
@@ -22,13 +22,16 @@
     <body>
 
         <nav>
-            <a href="/">Home</a>
-            <a href="/projects">Projects</a>
-            <a href="/workshops">Workshops</a>
-            <a href="/about">About</a>
+             <a href="/"><img src="images/square_logo.svg" id="nav-logo" alt="Circuit Circus logo"></a>
+            <a href="/projects" class="nav-item">Projects</a>
+            <a href="/workshops" class="nav-item">Workshops</a>
+            <a href="/about" class="nav-item">About</a>
+            <a href="/contact" class="nav-item">Contact</a>
         </nav>
 
-        <%- body %>
+        <div id="page-content">
+            <%- body %>
+        </div>
 
         <footer>
             <!-- Google analytics -->

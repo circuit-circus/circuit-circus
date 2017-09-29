@@ -1,11 +1,12 @@
-<h1>Projects</h1>
 
-<% projects.forEach(function(project) { %>
-    <article>
-        <h1><a href="/projects/<%= project.fields.slug %>">
-            <%= project.fields.title %>
-        </a></h1>
+<div id="projects-page">
+    <% projects.forEach(function(project) { %>
+        <article>
+            <h1><a href="/projects/<%= project.fields.slug %>">
+                <%= project.fields.title %>
+            </a></h1>
 
-        <p class="strong"><%= project.fields.leadParagraph %></p>
-    </article>
-<% }); %>
+            <p class="strong"><%= project.fields.leadParagraph %></p>
+        </article>
+    <% }); %>
+</div>
