@@ -2,7 +2,9 @@
 
 <% projects.forEach(function(project) { %>
     <article>
-        <h1><%= project.fields.title %></h1>
+        <h1><a href="/projects/<%= project.fields.slug %>">
+            <%= project.fields.title %>
+        </a></h1>
 
         <p class="strong"><%= project.fields.leadParagraph %></p>
         <p><%= project.fields.bodyText %></p>

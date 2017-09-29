@@ -2,7 +2,9 @@
 
 <% workshops.forEach(function(workshop) { %>
     <article>
-        <h1><%= workshop.fields.title %></h1>
+        <h1><a href="/workshops/<%= workshop.fields.slug %>">
+            <%= workshop.fields.title %>
+        </a></h1>
 
         <p class="strong"><%= workshop.fields.leadParagraph %></p>
         <p><%= workshop.fields.bodyText %></p>
