@@ -14,57 +14,17 @@ app.use(favicon('favicon.png'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// Contentful setup
-const client = contentful.createClient({
-    // This is the space ID. A space is like a project folder in Contentful terms
-    space: 'oewqprhhhtof',
-    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-    accessToken: 'a75e18bbc503ef3471d464e9648bfef6cefc1c3ac76338e1fec42d02ba6e718c'
-});
+
+var index = require('./routes/index.js');
+var projects = require('./routes/projects.js');
+var workshops = require('./routes/workshops.js');
+
+app.use('/', index);
+app.use('/projects', projects);
+app.use('/workshops', workshops);
 
 
-// Routes
-app.route('/').get(function(req, res) {
-    res.render('index');
-});
-
-app.route('/projects').get(function(req, res) {
-    client.getEntries({
-        'content_type': 'project'
-    })
-    .then(function (entries) {
-        res.render('projects', { projects: entries.items });
-    });
-});
-
-app.param('slug', function (req, res, next, slug) {
-    var query = {
-        'content_type' : 'project',
-        'fields.slug' : slug
-    }
-
-    client.getEntries(query).then(function(project) {
-        req.project = project.items[0];
-        next();
-    }).catch(function(error) {
-        console.log(error);
-    });
-})
-
-app.route('/projects/:slug').get(function(req, res) {
-    res.render('projects-single', {project: req.project});
-});
-
-app.route('/workshops').get(function(req, res) {
-    client.getEntries({
-        'content_type': 'workshop'
-    })
-    .then(function (entries) {
-        res.render('workshops', { workshops: entries.items });
-    });
-});
-
-// general error handling
+// General error handling
 app.use(function (err, req, res, next) {
     console.log(err);
 	if (err.status == 404) {
