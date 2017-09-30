@@ -1,1 +1,1 @@
-$(document).ready(function(){});
+$(document).ready(function(){$("nav a").on("click",function(){var n=$(this).attr("data-target");console.log(n),$.ajax({url:"/"+n}).done(function(n){console.log(n)})})});

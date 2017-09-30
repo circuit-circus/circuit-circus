@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
         'content_type': 'project'
     })
     .then(function (entries) {
-        res.render('pages/projects', { projects: entries.items });
+        //res.render('pages/projects', { projects: entries.items });
+        res.send({projects: entries.items});
     });
 });
 
