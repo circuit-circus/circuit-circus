@@ -20,17 +20,52 @@
     </head>
 
     <body>
+        <div class="site-container">
 
-        <nav>
-            <a href="/#"><img src="images/square_logo.svg" class="nav-item" id="nav-logo" alt="Circuit Circus logo"></a>
-            <a href="#projects" data-target="projects" class="nav-item">Projects</a>
-            <a href="#workshops" data-target="workshops" class="nav-item">Workshops</a>
-            <a href="#about" data-target="about" class="nav-item">About</a>
-            <a href="#contact" data-target="contact" class="nav-item">Contact</a>
-        </nav>
+            <nav>
+                <a href="/#"><img src="images/square_logo.svg" class="nav-item" id="nav-logo" alt="Circuit Circus logo"></a>
+                <a href="#projects" data-target="projects" class="nav-item">Projects</a>
+                <a href="#workshops" data-target="workshops" class="nav-item">Workshops</a>
+                <a href="#about" data-target="about" class="nav-item">About</a>
+                <a href="#contact" data-target="contact" class="nav-item">Contact</a>
+            </nav>
 
-        <div id="page-content">
-            <%- body %>
+            <!--
+            <div id="page-content">
+                <%- // body %>
+            </div> -->
+
+            <div class="page-container">
+                <section class="page-section" data-id="home" data-section-no="0">
+                    <div class="page-content">
+                        <% include pages/index %>
+                    </div>
+                </section>
+
+                <section class="page-section" data-id="projects" data-section-no="1">
+                    <div class="page-content">
+                        <% include pages/projects %>
+                    </div>
+                </section>
+
+                <section class="page-section" data-id="workshops" data-section-no="2">
+                    <div class="page-content">
+                        <% include pages/workshops %>
+                    </div>
+                </section>
+
+                <section class="page-section" data-id="about" data-section-no="3">
+                    <div class="page-content">
+                        <% include pages/about %>
+                    </div>
+                </section>
+
+                <section class="page-section" data-id="contact" data-section-no="4">
+                    <div class="page-content">
+                        <% include pages/contact %>
+                    </div>
+                </section>
+            </div>
         </div>
 
         <footer>

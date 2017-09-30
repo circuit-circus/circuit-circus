@@ -1,0 +1,45 @@
+
+.page-container {
+    position: relative;
+    width: 100vw;
+    transition: transform 0.4s ease-in-out;
+}
+.page-section {
+    width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    &[data-id='home'] {
+        background-color: pink;
+    }
+
+    &[data-id='projects'] {
+        background-color: orange;
+        left: 100vw;
+    }
+
+    &[data-id='workshops'] {
+        background-color: slateblue;
+        left: 200vw;
+    }
+
+    &[data-id='about'] {
+        background-color: mediumseagreen;
+        left: 300vw;
+    }
+
+    &[data-id='contact'] {
+        background-color: tomato;
+        left: 400vw;
+    }
+
+    .page-content {
+        position: relative;
+        top: 200px;
+    }
+}
+
+

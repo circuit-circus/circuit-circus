@@ -1,6 +1,11 @@
 nav {
     text-align: center;
     padding: 1rem;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 
     #nav-logo {
         width: 100px;
