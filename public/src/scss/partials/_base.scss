@@ -19,9 +19,10 @@ body {
 
 h1 {
     font-weight: 900;
-    font-size: 3em;
+    font-size: 6em;
     text-transform: uppercase;
     letter-spacing: 2px;
+    line-height: 1em;
 }
 
 h2 {
@@ -39,14 +40,4 @@ h3 {
 a {
     text-decoration: none;
     color: $text-color;
-}
-
-#page-content {
-    width: 90%;
-    max-width: 1000px;
-    margin: 2rem auto 1rem;
-}
-
-#index {
-    text-align: center;
 }

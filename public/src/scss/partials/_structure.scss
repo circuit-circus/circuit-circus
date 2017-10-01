@@ -6,23 +6,26 @@
 }
 .page-section {
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    overflow-y: scroll;
 
     &[data-id='home'] {
         background-color: pink;
+        background: linear-gradient(to right, pink, orange);
     }
 
     &[data-id='projects'] {
         background-color: orange;
+        background: linear-gradient(to right, orange, tomato);
         left: 100vw;
     }
 
     &[data-id='workshops'] {
-        background-color: slateblue;
+        background-color: tomato;
         left: 200vw;
     }
 
@@ -39,6 +42,10 @@
     .page-content {
         position: relative;
         top: 200px;
+        left: 0;
+        right: 0;
+        width: 90%;
+        margin: 0 auto 2rem;
     }
 }
 

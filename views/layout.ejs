@@ -23,7 +23,9 @@
         <div class="site-container">
 
             <nav>
-                <a href="/#"><img src="images/square_logo.svg" class="nav-item" id="nav-logo" alt="Circuit Circus logo"></a>
+                <a href="/#" data-target="home" class="nav-item">
+                    <img src="images/square_logo.svg" id="nav-logo" alt="Circuit Circus logo">
+                </a>
                 <a href="#projects" data-target="projects" class="nav-item">Projects</a>
                 <a href="#workshops" data-target="workshops" class="nav-item">Workshops</a>
                 <a href="#about" data-target="about" class="nav-item">About</a>
@@ -42,13 +44,13 @@
                     </div>
                 </section>
 
-                <section class="page-section" data-id="projects" data-section-no="1">
+                <section class="page-section not-loaded" data-id="projects" data-section-no="1">
                     <div class="page-content">
                         <% include pages/projects %>
                     </div>
                 </section>
 
-                <section class="page-section" data-id="workshops" data-section-no="2">
+                <section class="page-section not-loaded" data-id="workshops" data-section-no="2">
                     <div class="page-content">
                         <% include pages/workshops %>
                     </div>
