@@ -12,7 +12,7 @@ var port = 35729;
 
 // Compile sass and move it
 gulp.task('minify-css', function() {
-    gulp.src('public/src/scss/**/*.scss')
+    gulp.src('public/src/scss/style.scss')
         .pipe(sass()
             .on('error', notify.onError('Error: <%= error.message %>'))
         )
@@ -27,10 +27,12 @@ gulp.task('compress-js', function() {
     gulp.src('public/src/js/*.js')
         .pipe(minifyjs({
             exclude: ['tasks'],
-            ignoreFiles: ['.combo.js', '-min.js']
+            ignoreFiles: ['.combo.js', '-min.js'],
+            noSource: true
             })
             .on('error', notify.onError('Error: <%= error.message %>'))
         )
+        .pipe(livereload(server))
         .pipe(gulp.dest('public/'))
 });
 
