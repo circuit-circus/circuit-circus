@@ -2,7 +2,7 @@
 .page-container {
     position: relative;
     width: 100vw;
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 .page-section {
     width: 100vw;
@@ -14,28 +14,38 @@
     overflow-y: scroll;
 
     &[data-id='home'] {
-        background-color: pink;
-        background: linear-gradient(to right, pink, orange);
+        background-color: #fafafa;
+        //background: linear-gradient(to right, pink, orange);
+
+        .page-content {
+
+            h1 {
+                margin-bottom: 1rem;
+            }
+            h2, h3 {
+                text-align: center;
+            }
+        }
     }
 
     &[data-id='projects'] {
-        background-color: orange;
-        background: linear-gradient(to right, orange, tomato);
+        background-color: #ffffff;
+        //background: linear-gradient(to right, orange, tomato);
         left: 100vw;
     }
 
     &[data-id='workshops'] {
-        background-color: tomato;
+        background-color: #fafafa;
         left: 200vw;
     }
 
     &[data-id='about'] {
-        background-color: mediumseagreen;
+        background-color: #ffffff;
         left: 300vw;
     }
 
     &[data-id='contact'] {
-        background-color: tomato;
+        background-color: #fafafa;
         left: 400vw;
     }
 
@@ -45,6 +55,7 @@
         left: 0;
         right: 0;
         width: 90%;
+        max-width: 1000px;
         margin: 0 auto 2rem;
     }
 }
