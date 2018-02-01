@@ -21,11 +21,8 @@
     }
 
     &[data-id='home'] {
-        //background-color: #fafafa;
-        //background: linear-gradient(to right, pink, orange);
 
         .page-content {
-
             text-align: center;
 
             h1 {
@@ -35,9 +32,6 @@
     }
 
     &[data-id='projects'] {
-        background-color: #ffffff;
-        //background: linear-gradient(to right, orange, tomato);
-        //left: 100vw;
 
         .projects-list-single {
             width: calc(50% - 1.5rem);
@@ -86,13 +80,9 @@
     }
 
     &[data-id='about'] {
-        background-color: #ffffff;
-        //left: 200vw;
     }
 
     &[data-id='contact'] {
-        background-color: #fafafa;
-        //left: 300vw;
     }
 
     .page-content {

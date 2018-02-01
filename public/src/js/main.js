@@ -9,6 +9,7 @@ $(document).ready(function () {
     var currentPage = hash.substring(1, hash.length);
     goToPage(currentPage, false);
 
+    // Navigation in main menu
     $('.nav-item').on('click', function(event) {
         event.stopPropagation();
         var target = $(this).attr('data-target');
@@ -41,6 +42,8 @@ function goToPage(target, fromMenu) {
 
 // Insert projects data
 function insertData(data, type, targetSection) {
+
+    // TO DO : Add loading spinner or something
 
     data.forEach(function(element) {
         var article = $(targetSection).find('article.template').clone();
