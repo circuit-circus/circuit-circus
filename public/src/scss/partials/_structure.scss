@@ -34,8 +34,8 @@
         left: 100vw;
 
         .projects-list-single {
-            width: calc(50% - 1rem);
-            margin-right: 2rem;
+            width: calc(50% - 1.5rem);
+            margin-right: 3rem;
             margin-bottom: 2rem;
             height: 310px;
 
@@ -52,7 +52,7 @@
                 padding-bottom: 60%;
                 background-size: cover;
 
-                background-color: #0000ff;
+                background-color: #eaeaea;
             }
 
             .projects-single-title {
