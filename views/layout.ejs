@@ -20,14 +20,21 @@
     </head>
 
     <body>
+
+        <div id="top-border" class="border"></div>
+        <div id="bottom-border" class="border"></div>
+        <div id="left-border" class="border"></div>
+        <div id="right-border" class="border"></div>
+
+
         <div class="site-container">
 
             <nav>
                 <a href="/#" data-target="home" class="nav-item">
                     <img src="images/square_logo.svg" id="nav-logo" alt="Circuit Circus logo">
                 </a>
+                <a href="/#" data-target="home" class="nav-item">Index</a>
                 <a href="#projects" data-target="projects" class="nav-item">Projects</a>
-                <a href="#workshops" data-target="workshops" class="nav-item">Workshops</a>
                 <a href="#about" data-target="about" class="nav-item">About</a>
                 <a href="#contact" data-target="contact" class="nav-item">Contact</a>
             </nav>
@@ -50,19 +57,13 @@
                     </div>
                 </section>
 
-                <section class="page-section not-loaded" data-id="workshops" data-section-no="2">
-                    <div class="page-content">
-                        <% include pages/workshops %>
-                    </div>
-                </section>
-
-                <section class="page-section" data-id="about" data-section-no="3">
+                <section class="page-section" data-id="about" data-section-no="2">
                     <div class="page-content">
                         <% include pages/about %>
                     </div>
                 </section>
 
-                <section class="page-section" data-id="contact" data-section-no="4">
+                <section class="page-section" data-id="contact" data-section-no="3">
                     <div class="page-content">
                         <% include pages/contact %>
                     </div>

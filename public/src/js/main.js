@@ -20,8 +20,8 @@ function goToPage(target, fromMenu) {
 
     var transformTo = targetSectionNo + '00';
 
-    // If it's either the projects or workshops page user is trying to navigate to, load these
-    if( (target == 'projects' || target == 'workshops') && targetSection.hasClass('not-loaded')) {
+    // If this is the projects page user is trying to navigate to, load these
+    if( (target == 'projects') && targetSection.hasClass('not-loaded')) {
         $.ajax({
             url: '/' + target,
         }).done(function(data) {
@@ -35,7 +35,7 @@ function goToPage(target, fromMenu) {
     }
 }
 
-// Insert projects or workshops data
+// Insert projects data
 function insertData(data, type, targetSection) {
 
     data.forEach(function(element) {

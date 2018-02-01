@@ -18,11 +18,16 @@ body {
 }
 
 h1 {
-    font-weight: 900;
-    font-size: 5.2em;
+    font-weight: 700;
+    font-size: 3.75em;
     //text-transform: uppercase;
     letter-spacing: 2px;
-    line-height: 1em;
+    line-height: 1.2em;
+
+    span {
+        color: #fff;
+        background-color: #0000ff;
+    }
 }
 
 h2 {
@@ -40,4 +45,37 @@ h3 {
 a {
     text-decoration: none;
     color: $text-color;
+}
+
+
+.border {
+    border-width: 7px;
+    border-style: solid;
+    border-color: #0000ff;
+    position: fixed;
+    z-index: 999;
+}
+
+#top-border {
+    top: 0;
+    width: 100vw;
+    left: 0; right: 0;
+}
+
+#bottom-border {
+    bottom: 0;
+    width: 100vw;
+    left: 0; right: 0;
+}
+
+#left-border {
+    left: 0;
+    top: 0; bottom: 0;
+    height: 100vh;
+}
+
+#right-border {
+    right: 0;
+    top: 0; bottom: 0;
+    height: 100vh;
 }

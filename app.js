@@ -17,11 +17,11 @@ app.set('view engine', 'ejs');
 
 var index = require('./routes/index.js');
 var projects = require('./routes/projects.js');
-var workshops = require('./routes/workshops.js');
+//var workshops = require('./routes/workshops.js');
 
 app.use('/', index);
 app.use('/projects', projects);
-app.use('/workshops', workshops);
+//app.use('/workshops', workshops);
 
 
 // General error handling
