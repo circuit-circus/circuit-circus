@@ -25,5 +25,9 @@ nav {
         &:first-of-type {
             padding: 0;
         }
+
+        &.active {
+            color: magenta;
+        }
     }
 }

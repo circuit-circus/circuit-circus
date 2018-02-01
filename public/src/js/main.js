@@ -3,22 +3,32 @@ $(document).ready(function () {
 
     // Check what page we're on
     var hash = window.location.hash;
+    if(hash == "") {
+        hash = "#home";
+    }
     var currentPage = hash.substring(1, hash.length);
     goToPage(currentPage, false);
 
-    $('nav a').on('click', function(event) {
+    $('.nav-item').on('click', function(event) {
         event.stopPropagation();
         var target = $(this).attr('data-target');
 
-        goToPage(target, true);
+        goToPage(target, true, this);
     });
 });
 
 function goToPage(target, fromMenu) {
     var targetSection = $('section[data-id="' + target + '"]');
+    if(!targetSection.length) {
+        console.log('ERROR!!!!');
+    }
     var targetSectionNo = targetSection.attr('data-section-no');
 
     var transformTo = targetSectionNo + '00';
+
+    $('.nav-item.active').removeClass('active');
+    console.log(target);
+    $('.nav-item[data-target="' + target + '"]').addClass('active');
 
     // If this is the projects page user is trying to navigate to, load these
     if( (target == 'projects') && targetSection.hasClass('not-loaded')) {
