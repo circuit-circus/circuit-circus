@@ -18,16 +18,15 @@ $(document).ready(function () {
 });
 
 function goToPage(target, fromMenu) {
-    var targetSection = $('section[data-id="' + target + '"]');
+    var targetSection = $('.page-section[data-id="' + target + '"]');
     if(!targetSection.length) {
         console.log('ERROR!!!!');
     }
-    var targetSectionNo = targetSection.attr('data-section-no');
 
-    var transformTo = targetSectionNo + '00';
+    $('.page-section.active').removeClass('active');
+    $('.page-section[data-id="' + target + '"]').addClass('active');
 
     $('.nav-item.active').removeClass('active');
-    console.log(target);
     $('.nav-item[data-target="' + target + '"]').addClass('active');
 
     // If this is the projects page user is trying to navigate to, load these
@@ -37,11 +36,6 @@ function goToPage(target, fromMenu) {
         }).done(function(data) {
             insertData(data[target], target, targetSection);
         });
-    }
-
-    $('.page-container').css({'transform': 'translate(-' + transformTo + 'vw, 0)'});
-    if(!fromMenu) {
-        $('.page-container').css({'transition-duration': '1s'});
     }
 }
 

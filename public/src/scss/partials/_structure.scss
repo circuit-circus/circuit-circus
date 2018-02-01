@@ -14,6 +14,12 @@
     right: 0;
     overflow-y: scroll;
 
+    display: none;
+
+    &.active {
+        display: block;
+    }
+
     &[data-id='home'] {
         //background-color: #fafafa;
         //background: linear-gradient(to right, pink, orange);
@@ -31,7 +37,7 @@
     &[data-id='projects'] {
         background-color: #ffffff;
         //background: linear-gradient(to right, orange, tomato);
-        left: 100vw;
+        //left: 100vw;
 
         .projects-list-single {
             width: calc(50% - 1.5rem);
@@ -81,12 +87,12 @@
 
     &[data-id='about'] {
         background-color: #ffffff;
-        left: 200vw;
+        //left: 200vw;
     }
 
     &[data-id='contact'] {
         background-color: #fafafa;
-        left: 300vw;
+        //left: 300vw;
     }
 
     .page-content {
