@@ -50,9 +50,12 @@ function insertData(data, type, targetSection) {
 
     data.forEach(function(element) {
         var article = $(targetSection).find('article.template').clone();
-        var permalink = $(article).find('a').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title);
-        $(article).find('h2').append(permalink);
-        $(article).find('p.strong').text(element.fields.leadParagraph);
+        var permalink = $(article).find('.projects-single-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title);
+        if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
+            $(article).find('.projects-single-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
+        }
+        $(article).find('.projects-single-title').append(permalink);
+        $(article).find('.projects-single-paragraph').text(element.fields.leadParagraph);
         $(article).removeClass('template');
         $(targetSection).find('.page-content').append(article);
     });

@@ -32,6 +32,51 @@
         background-color: #ffffff;
         //background: linear-gradient(to right, orange, tomato);
         left: 100vw;
+
+        .projects-list-single {
+            width: calc(50% - 1rem);
+            margin-right: 2rem;
+            margin-bottom: 2rem;
+            height: 310px;
+
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+
+            &:nth-of-type(odd) {
+                margin-right: 0;
+            }
+
+            .projects-single-cover-image {
+                width: 100%;
+                padding-bottom: 60%;
+                background-size: cover;
+
+                background-color: #0000ff;
+            }
+
+            .projects-single-title {
+                position: relative;
+                top: -25px;
+                left: 15px;
+                font-size: 2rem;
+            }
+
+            .projects-single-permalink {
+                background: #ffffff;
+                color: #0000ff;
+                padding: 0 5px;
+            }
+
+            .projects-single-paragraph {
+                position: relative;
+                top: -20px;
+            }
+
+            &.template {
+                display: none;
+            }
+        }
     }
 
     &[data-id='about'] {
@@ -49,7 +94,7 @@
         top: 220px;
         left: 0;
         right: 0;
-        width: 90%;
+        width: 85%;
         max-width: 800px;
         margin: 0 auto 2rem;
     }
