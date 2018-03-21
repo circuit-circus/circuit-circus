@@ -27,7 +27,7 @@ router.param('slug', function (req, res, next, slug) {
 })
 
 router.get('/:slug', function(req, res, next) {
-    res.render('pages/projects-single', {project: req.project});
+    res.send({project: req.project});
 });
 
 module.exports = router;

@@ -16,6 +16,12 @@ $(document).ready(function () {
 
         goToPage(target, true, this);
     });
+
+    $('body').on('click', '.projects-single-permalink', function() {
+        var slug = $(this).attr('data-slug');
+        console.log(slug);
+        getSingleProject(slug);
+    });
 });
 
 function goToPage(target, fromMenu) {
@@ -35,19 +41,21 @@ function goToPage(target, fromMenu) {
         $.ajax({
             url: '/' + target,
         }).done(function(data) {
-            insertData(data[target], target, targetSection);
+            insertProjectsData(data[target], target, targetSection);
         });
     }
 }
 
 // Insert projects data
-function insertData(data, type, targetSection) {
+function insertProjectsData(data, type, targetSection) {
 
     // TO DO : Add loading spinner or something
 
+    console.log(data);
+
     data.forEach(function(element) {
         var article = $(targetSection).find('article.template').clone();
-        var permalink = $(article).find('.projects-single-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title);
+        var permalink = $(article).find('.projects-single-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug);
         if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
             $(article).find('.projects-single-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
         }
@@ -58,4 +66,19 @@ function insertData(data, type, targetSection) {
     });
 
     targetSection.removeClass('not-loaded').addClass('loaded');
+}
+
+function getSingleProject(slug) {
+
+    console.log(slug);
+
+    $.ajax({
+        url: '/projects/' + slug,
+    }).done(function(data) {
+        insertSingleProjectData(data);
+    });
+}
+
+function insertSingleProjectData(data) {
+    console.log(data);
 }

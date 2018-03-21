@@ -7,7 +7,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "contentful": "^4.6.2",
