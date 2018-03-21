@@ -31,6 +31,10 @@
                 margin: 3rem 0 2rem;
             }
 
+            h2 {
+                font-size: 8rem;
+            }
+
             h1, h2 {
                 text-transform: uppercase;
                 text-align: justify;
@@ -63,7 +67,6 @@
                 position: relative;
                 top: -25px;
                 left: 15px;
-                font-size: 4rem;
                 letter-spacing: 2px;
             }
 
@@ -78,7 +81,7 @@
                 top: -20px;
                 margin-top: 10px;
                 background-color: #fff;
-                padding: 5px;
+                padding: 5px 25px 5px 5px;
             }
 
             &.template {
@@ -88,6 +91,11 @@
     }
 
     &[data-id='about'] {
+
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
 
     &[data-id='contact'] {
@@ -103,5 +111,3 @@
         margin: 0 auto 2rem;
     }
 }
-
-
