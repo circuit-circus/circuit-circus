@@ -36,7 +36,7 @@ h1 {
 
 h2 {
     font-weight: 900;
-    font-size: 8rem;
+    font-size: 4rem;
     line-height: 1;
     letter-spacing: 1px;
 
@@ -51,6 +51,15 @@ h3 {
 a {
     text-decoration: none;
     color: $text-color;
+}
+
+p {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    letter-spacing: 1px;
+
+    a {
+        color: #0000ff;
+    }
 }
 
 #background-container {
