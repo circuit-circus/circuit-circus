@@ -1,3 +1,5 @@
+var converter = new showdown.Converter();
+
 // Set event listeners
 $(document).ready(function () {
 
@@ -19,8 +21,8 @@ $(document).ready(function () {
 
     $('body').on('click', '.projects-single-permalink', function() {
         var slug = $(this).attr('data-slug');
-        console.log(slug);
         getSingleProject(slug);
+        showSingleProject();
     });
 });
 
@@ -69,9 +71,6 @@ function insertProjectsData(data, type, targetSection) {
 }
 
 function getSingleProject(slug) {
-
-    console.log(slug);
-
     $.ajax({
         url: '/projects/' + slug,
     }).done(function(data) {
@@ -80,5 +79,15 @@ function getSingleProject(slug) {
 }
 
 function insertSingleProjectData(data) {
-    console.log(data);
+    var project = $('.projects-single-template');
+    project.find('.projects-single-title').text(data.project.fields.title);
+    project.find('.projects-single-lead').text(data.project.fields.leadParagraph);
+    var bodyHtml = converter.makeHtml(data.project.fields.bodyText);
+    project.find('.projects-single-body').html(bodyHtml);
+    project.removeClass('.projects-single-template').addClass('projects-single').attr('id', data.project.fields.slug);
+    $('.projects-single-section .page-content').html(project).removeClass('not-loaded').addClass('loaded');
+}
+
+function showSingleProject() {
+    $('.projects-single-section').addClass('active');
 }
