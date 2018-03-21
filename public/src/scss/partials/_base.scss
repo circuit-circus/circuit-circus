@@ -18,23 +18,29 @@ body {
 }
 
 h1 {
-    font-weight: 700;
-    font-size: 3.25em;
-    //text-transform: uppercase;
+    font-weight: 900;
+    font-size: 12rem;
     letter-spacing: 2px;
-    line-height: 1.2em;
+    line-height: 1;
+    margin-bottom: 0;
 
+    color: #0000ff;
+
+    /*
     span {
         color: #fff;
         background-color: #0000ff;
     }
+    */
 }
 
 h2 {
-    font-weight: 700;
-    font-size: 1.25em;
-    //text-transform: uppercase;
+    font-weight: 900;
+    font-size: 8rem;
+    line-height: 1;
     letter-spacing: 1px;
+
+    color: #0000ff;
 }
 
 h3 {
@@ -47,6 +53,20 @@ a {
     color: $text-color;
 }
 
+#background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    font-size: 5rem;
+    text-align: justify;
+    text-align-last: justify;
+    line-height: 1;
+    font-weight: 700;
+    word-break: break-all;
+}
 
 .border {
     border-width: 7px;
@@ -54,6 +74,8 @@ a {
     border-color: #0000ff;
     position: fixed;
     z-index: 999;
+
+    display: none;
 }
 
 #top-border {

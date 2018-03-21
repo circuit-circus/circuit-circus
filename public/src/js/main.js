@@ -22,6 +22,16 @@ $(document).ready(function () {
         console.log(slug);
         getSingleProject(slug);
     });
+
+    $('body').on('mouseenter', '.projects-single-permalink', function() {
+        var string = $(this).attr('data-name') + ' ';
+        string = string.repeat(500);
+        $('#background-container').html(string);
+    });
+
+    $('body').on('mouseleave', '.projects-single-permalink', function() {
+        $('#background-container').html('');
+    });
 });
 
 function goToPage(target, fromMenu) {
@@ -55,7 +65,7 @@ function insertProjectsData(data, type, targetSection) {
 
     data.forEach(function(element) {
         var article = $(targetSection).find('article.template').clone();
-        var permalink = $(article).find('.projects-single-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug);
+        var permalink = $(article).find('.projects-single-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
         if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
             $(article).find('.projects-single-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
         }
