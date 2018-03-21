@@ -1,3 +1,13 @@
+*::-moz-selection {
+    background-color: #00f;
+    color: #fff;
+}
+
+*::selection {
+    background-color: #00f;
+    color: #fff;
+}
+
 * {
     box-sizing: border-box;
 }

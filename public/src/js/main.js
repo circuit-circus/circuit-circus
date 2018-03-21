@@ -9,7 +9,15 @@ $(document).ready(function () {
         hash = "#home";
     }
     var currentPage = hash.substring(1, hash.length);
-    goToPage(currentPage, false);
+    if(currentPage.indexOf('projects/') === -1) {
+        goToPage(currentPage, false);
+    }
+    else {
+        var currentProject = currentPage.substring('projects/'.length, currentPage.length);
+        goToPage('projects', false);
+        getSingleProject(currentProject);
+        showSingleProject();
+    }
 
     // Navigation in main menu
     $('.nav-item').on('click', function(event) {

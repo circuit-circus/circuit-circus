@@ -16,6 +16,7 @@ nav {
     }
 
     .nav-item {
+        box-sizing: border-box;
         text-decoration: none;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -44,5 +45,10 @@ nav {
             display: block;
         }
         */
+
+        &:not(:first-of-type):hover span, &:not(:first-of-type).active {
+            display: inline-block;
+            transform: rotate(30deg);
+        }
     }
 }
