@@ -21,11 +21,9 @@ nav {
         text-transform: uppercase;
         letter-spacing: 2px;
         font-size: 12px;
-        padding: 0.5rem;
         position: relative;
         margin: 0 5px;
 
-        background-color: #fff;
         font-weight: 700;
 
         &:first-of-type {
@@ -46,9 +44,18 @@ nav {
         }
         */
 
-        &:not(:first-of-type):hover span, &:not(:first-of-type).active {
+        span {
+            background-color: #fff;
+            padding: 0.5rem;
+        }
+
+        &:not(:first-of-type):hover span, &:not(:first-of-type).active span {
             display: inline-block;
             transform: rotate(30deg);
+        }
+
+        &:not(:first-of-type):hover.active span {
+            transform: rotate(60deg);
         }
     }
 }

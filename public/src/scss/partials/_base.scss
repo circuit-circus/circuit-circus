@@ -72,7 +72,8 @@ p {
     }
 }
 
-#background-container {
+.background-container {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -85,6 +86,10 @@ p {
     line-height: 1;
     font-weight: 700;
     word-break: break-all;
+}
+
+.background-container.active {
+    display: block;
 }
 
 .border {
