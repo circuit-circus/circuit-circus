@@ -179,7 +179,8 @@ function insertSingleProjectData(data) {
     }
 
     project.removeClass('.projects-single-template').addClass('projects-single').attr('id', data.project.fields.slug);
-    $('.projects-single-section .page-content').html(project).removeClass('not-loaded').addClass('loaded');
+    $('.projects-single-section .page-content').html(project);
+    $('.projects-single-section').removeClass('not-loaded').addClass('loaded').scrollTop(0);
 }
 
 function showSingleProject() {

@@ -74,22 +74,18 @@ p {
 }
 
 button {
-    background: none;
-    border: 0;
-    color: #fff;
+    border-color: #00f;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    color: #00f;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
+    padding-bottom: 2px;
     position: relative;
+    transition: border 300ms ease-in-out;
 
-    &::after {
-        background: #00f;
-        bottom: -2px;
-        content: '';
-        height: 2px;
-        left: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 0;
+    &:hover {
+        border-style: dashed;
     }
 }
 
