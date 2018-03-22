@@ -73,6 +73,26 @@ p {
     }
 }
 
+button {
+    background: none;
+    border: 0;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    position: relative;
+
+    &::after {
+        background: #00f;
+        bottom: -2px;
+        content: '';
+        height: 2px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 0;
+    }
+}
+
 .background-container {
     display: none;
     position: fixed;

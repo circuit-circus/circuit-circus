@@ -20,18 +20,18 @@ $(document).ready(function () {
         goToPage(target, true, this);
     });
 
-    $('body').on('click', '.projects-single-permalink', function() {
+    $('body').on('click', '.projects-item-permalink', function() {
         var slug = $(this).attr('data-slug');
         toggleLoading(true);
         getSingleProject(slug, showSingleProject);
     });
 
-    $('body').on('mouseenter', '.projects-single-permalink', function() {
+    $('body').on('mouseenter', '.projects-item-permalink', function() {
         var name = $(this).data('name');
         $('.background-container[data-name="' + name + '"]').addClass('active');
     });
 
-    $('body').on('mouseleave', '.projects-single-permalink', function() {
+    $('body').on('mouseleave', '.projects-item-permalink', function() {
         var name = $(this).data('name');
         $('.background-container[data-name="' + name + '"]').removeClass('active');
     });
@@ -59,7 +59,7 @@ function goToCurrentPage() {
 function goToPage(target, fromMenu) {
     var targetSection = $('.page-section[data-id="' + target + '"]');
     if(!targetSection.length) {
-        console.log('ERROR!!!!');
+        console.error('Error: Page Section length is ' + targetSection.length);
     }
 
     $('.page-section.active').removeClass('active');
@@ -128,11 +128,46 @@ function insertSingleProjectData(data) {
     var project = $('.projects-single-template');
     project.find('.projects-single-title').text(data.project.fields.title);
     project.find('.projects-single-lead').text(data.project.fields.leadParagraph);
-    console.log(data.project.fields.bodyText);
+
     var bodyHtml = converter.makeHtml(data.project.fields.bodyText);
-    console.log(bodyHtml);
     project.find('.projects-single-body').html(bodyHtml);
-    $('.projects-single-section .projects-single-img-container').html('');
+
+    $('.projects-single-section .projects-single-video-container').html(''); // Clear old videos before adding new one
+    $('.projects-single-video-container video').off('click');
+    $('.projects-single-video-container .mute').off('click');
+    if(data.project.fields.video !== undefined && data.project.fields.video !== null && data.project.fields.video.length > 0) {
+        var vidElem = $('<div class="video-wrapper"><video src="" autoplay loop></video><button class="mute">Turn sound on</button></div>');
+        for(var i in data.project.fields.video) {
+            var vidDat = data.project.fields.video[i];
+            var newVid = vidElem.clone();
+            newVid.find('video').attr('src', vidDat.fields.file.url);
+            project.find('.projects-single-video-container').append(newVid);
+            newVid.find('video').get(0).muted = true;
+        }
+    }
+    $('.projects-single-video-container video').on('click', function() {
+        var vidElem = $(this).get(0);
+        if(vidElem.paused) {
+            vidElem.play();
+        }
+        else {
+            vidElem.pause();
+        }
+    });
+    $('.projects-single-video-container .mute').on('click', function() {
+        var vidElem = $(this).siblings('video').get(0);
+        console.log(vidElem);
+        if(vidElem.muted) {
+            vidElem.muted = false;
+            $(this).text('Turn sound off');
+        }
+        else {
+            vidElem.muted = true;
+            $(this).text('Turn sound on');
+        }
+    });
+
+    $('.projects-single-section .projects-single-img-container').html(''); // Clear old images before adding new one
     if(data.project.fields.gallery !== undefined && data.project.fields.gallery !== null && data.project.fields.gallery.length > 0) {
         var imgElem = $('<img/>');
         for(var i in data.project.fields.gallery) {
@@ -142,6 +177,7 @@ function insertSingleProjectData(data) {
             project.find('.projects-single-img-container').append(newImg);
         }
     }
+
     project.removeClass('.projects-single-template').addClass('projects-single').attr('id', data.project.fields.slug);
     $('.projects-single-section .page-content').html(project).removeClass('not-loaded').addClass('loaded');
 }

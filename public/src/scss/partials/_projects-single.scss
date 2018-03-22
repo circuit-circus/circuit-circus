@@ -12,6 +12,7 @@
 
 .projects-single-title {
 	margin-bottom: 40px;
+	word-wrap: break-word;
 }
 
 .projects-single-lead {
@@ -44,6 +45,37 @@
 
 .projects-single-body {
 	padding-bottom: 1rem;
+}
+
+
+.projects-single-video-container {
+	margin-bottom: 5px;
+	position: relative;
+
+	.video-wrapper {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		.mute {
+			cursor: pointer;
+			color: #00f;
+			display: inline;
+			margin: .25rem 0 1rem 0;
+			padding: 0;
+		}
+	}
+
+	video {
+		cursor: pointer;
+		height: auto;
+		width: 100%;
+
+		&:hover {
+			opacity: 0.9;
+		}
+	}
 }
 
 .projects-single-img-container img {
