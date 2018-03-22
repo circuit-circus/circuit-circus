@@ -105,7 +105,7 @@ function insertProjectsData(data, type, targetSection) {
 
         var thisBgContainer = bgContainer.clone();
         thisBgContainer.attr('data-name', element.fields.title);
-        var string = element.fields.title + ''; // Convert to string
+        var string = element.fields.title + ' '; // Convert to string
         string = string.repeat(200);
         thisBgContainer.html(string);
         bgContainer.after(thisBgContainer);
