@@ -36,13 +36,13 @@ $(document).ready(function () {
     });
 
     $('body').on('mouseenter', '.projects-single-permalink', function() {
-        var name = $(this).attr('data-name');
+        var name = $(this).data('name');
         $('.background-container[data-name="' + name + '"]').addClass('active');
     });
 
     $('body').on('mouseleave', '.projects-single-permalink', function() {
-        var name = $(this).attr('data-name');
-        $('.background-container[data-name="' + name + '"]').addClass('active');
+        var name = $(this).data('name');
+        $('.background-container[data-name="' + name + '"]').removeClass('active');
     });
 });
 
@@ -93,11 +93,11 @@ function insertProjectsData(data, type, targetSection) {
         $(targetSection).find('.page-content').append(article);
 
         var thisBgContainer = bgContainer.clone();
-        thisBgContainer.data('name', element.fields.title);
+        thisBgContainer.attr('data-name', element.fields.title);
         var string = element.fields.title + ''; // Convert to string
         string = string.repeat(200);
         thisBgContainer.html(string);
-        $('body').append(thisBgContainer);
+        bgContainer.after(thisBgContainer);
     });
 
     targetSection.removeClass('not-loaded').addClass('loaded');
