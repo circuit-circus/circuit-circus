@@ -135,11 +135,14 @@ function insertSingleProjectData(data) {
     project.find('.projects-single-body').html(bodyHtml);
     $('.projects-single-section .projects-single-img-container').html('');
     if(data.project.fields.gallery !== undefined && data.project.fields.gallery !== null && data.project.fields.gallery.length > 0) {
-        var imgElem = $('<img/>');
+        var imgElem = $('<div class="projects-single-img"><img/></div>');
         for(var i in data.project.fields.gallery) {
             var imgDat = data.project.fields.gallery[i];
             var newImg = imgElem.clone();
-            newImg.attr('src', imgDat.fields.file.url);
+            newImg.find('img').attr('src', imgDat.fields.file.url);
+            if(imgDat.fields.description && imgDat.fields.description.length > 0) {
+                newImg.append($('<span class="projects-single-img-description"></span>').text(imgDat.fields.description));
+            }
             project.find('.projects-single-img-container').append(newImg);
         }
     }
