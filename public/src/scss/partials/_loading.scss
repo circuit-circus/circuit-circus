@@ -1,0 +1,35 @@
+.loading-page {
+	align-items: center;
+	background: rgba(255, 255, 255, 0.0);
+	display: none;
+	left: 0;
+	height: 100%;
+	justify-content: center;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	transition: all 300ms;
+	width: 100%;
+	z-index: 9999;
+}
+
+.loading-page.active {
+	background: rgba(255, 255, 255, 1.0);
+	display: flex;
+}
+
+.active .loading-squiggle {
+	animation-name: rotateThis;
+	animation-duration: 500ms;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+@keyframes rotateThis {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
