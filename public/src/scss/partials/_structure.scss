@@ -45,8 +45,7 @@
 
     &[data-id='projects'] {
 
-        .projects-list-single {
-            //width: calc(50% - 1.5rem);
+        .projects-list-item {
             width: 100%;
             margin-right: 3rem;
             margin-bottom: 2rem;
@@ -54,7 +53,7 @@
             overflow: hidden;
             vertical-align: top;
 
-            .projects-single-cover-image {
+            .projects-item-cover-image {
                 width: 100%;
                 padding-bottom: 50%;
                 background-size: cover;
@@ -63,20 +62,20 @@
                 background-color: #eaeaea;
             }
 
-            .projects-single-title {
+            .projects-item-title {
                 position: relative;
                 top: -25px;
                 left: 15px;
                 letter-spacing: 2px;
             }
 
-            .projects-single-permalink {
+            .projects-item-permalink {
                 background: #ffffff;
                 color: #0000ff;
                 padding: 0 5px;
             }
 
-            .projects-single-paragraph {
+            .projects-item-paragraph {
                 position: relative;
                 top: -20px;
                 margin-top: 10px;

@@ -52,8 +52,7 @@ function goToCurrentPage() {
         var currentProject = currentPage.substring('projects/'.length, currentPage.length);
         toggleLoading(true);
         goToPage('projects', false);
-        getSingleProject(currentProject);
-        showSingleProject();
+        getSingleProject(currentProject, showSingleProject);
     }
 }
 
@@ -74,6 +73,7 @@ function goToPage(target, fromMenu) {
         $.ajax({
             url: '/' + target,
         }).done(function(data) {
+            console.log(data);
             insertProjectsData(data[target], target, targetSection);
             toggleLoading(false);
         });
@@ -94,12 +94,12 @@ function insertProjectsData(data, type, targetSection) {
 
     data.forEach(function(element) {
         var article = $(targetSection).find('article.template').clone();
-        var permalink = $(article).find('.projects-single-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
+        var permalink = $(article).find('.projects-item-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
         if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
-            $(article).find('.projects-single-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
+            $(article).find('.projects-item-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
         }
-        $(article).find('.projects-single-title').append(permalink);
-        $(article).find('.projects-single-paragraph').text(element.fields.leadParagraph);
+        $(article).find('.projects-item-title').append(permalink);
+        $(article).find('.projects-item-paragraph').text(element.fields.leadParagraph);
         $(article).removeClass('template');
         $(targetSection).find('.page-content').append(article);
 
@@ -128,7 +128,9 @@ function insertSingleProjectData(data) {
     var project = $('.projects-single-template');
     project.find('.projects-single-title').text(data.project.fields.title);
     project.find('.projects-single-lead').text(data.project.fields.leadParagraph);
+    console.log(data.project.fields.bodyText);
     var bodyHtml = converter.makeHtml(data.project.fields.bodyText);
+    console.log(bodyHtml);
     project.find('.projects-single-body').html(bodyHtml);
     $('.projects-single-section .projects-single-img-container').html('');
     if(data.project.fields.gallery !== undefined && data.project.fields.gallery !== null && data.project.fields.gallery.length > 0) {
