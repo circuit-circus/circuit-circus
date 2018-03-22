@@ -3,20 +3,12 @@ var converter = new showdown.Converter();
 // Set event listeners
 $(document).ready(function () {
 
-    // Check what page we're on
-    var hash = window.location.hash;
-    if(hash == "") {
-        hash = "#home";
-    }
-    var currentPage = hash.substring(1, hash.length);
-    if(currentPage.indexOf('projects/') === -1) {
-        goToPage(currentPage, false);
-    }
-    else {
-        var currentProject = currentPage.substring('projects/'.length, currentPage.length);
-        goToPage('projects', false);
-        getSingleProject(currentProject);
-        showSingleProject();
+    // Find out which page we're on on load
+    goToCurrentPage();
+
+    // This is triggered when user uses back button
+    window.onhashchange = function() {
+        goToCurrentPage();
     }
 
     // Navigation in main menu
@@ -43,6 +35,24 @@ $(document).ready(function () {
         $('#background-container').html('');
     });
 });
+
+function goToCurrentPage() {
+    var hash = window.location.hash;
+    if(hash == '') {
+        hash = "#home";
+    }
+    var currentPage = hash.substring(1, hash.length);
+
+    if(currentPage.indexOf('projects/') === -1) {
+        goToPage(currentPage, false);
+    }
+    else {
+        var currentProject = currentPage.substring('projects/'.length, currentPage.length);
+        goToPage('projects', false);
+        getSingleProject(currentProject);
+        showSingleProject();
+    }
+}
 
 function goToPage(target, fromMenu) {
     var targetSection = $('.page-section[data-id="' + target + '"]');
