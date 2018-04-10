@@ -73,8 +73,9 @@ function goToPage(target, fromMenu) {
         $.ajax({
             url: '/' + target,
         }).done(function(data) {
-            console.log(data);
-            insertProjectsData(data[target], target, targetSection);
+            // Sort projects
+            var projectsData = data.projects.sort(compareProjectDates);
+            insertProjectsData(projectsData, targetSection);
             toggleLoading(false);
         });
     }
@@ -84,7 +85,7 @@ function goToPage(target, fromMenu) {
 }
 
 // Insert projects data
-function insertProjectsData(data, type, targetSection) {
+function insertProjectsData(data, targetSection) {
 
     // TO DO : Add loading spinner or something
 
@@ -94,7 +95,7 @@ function insertProjectsData(data, type, targetSection) {
 
     data.forEach(function(element) {
         var article = $(targetSection).find('article.template').clone();
-        var permalink = $(article).find('.projects-item-permalink').attr('href', '#' + type + '/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
+        var permalink = $(article).find('.projects-item-permalink').attr('href', '#projects/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
         if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
             $(article).find('.projects-item-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
         }
@@ -169,11 +170,14 @@ function insertSingleProjectData(data) {
 
     $('.projects-single-section .projects-single-img-container').html(''); // Clear old images before adding new one
     if(data.project.fields.gallery !== undefined && data.project.fields.gallery !== null && data.project.fields.gallery.length > 0) {
-        var imgElem = $('<img/>');
+        var imgElem = $('<div class="projects-single-img"><img/></div>');
         for(var i in data.project.fields.gallery) {
             var imgDat = data.project.fields.gallery[i];
             var newImg = imgElem.clone();
-            newImg.attr('src', imgDat.fields.file.url);
+            newImg.find('img').attr('src', imgDat.fields.file.url);
+            if(imgDat.fields.description && imgDat.fields.description.length > 0) {
+                newImg.append($('<span class="projects-single-img-description"></span>').text(imgDat.fields.description));
+            }
             project.find('.projects-single-img-container').append(newImg);
         }
     }
@@ -189,4 +193,18 @@ function showSingleProject() {
 
 function toggleLoading(shouldShow) {
     shouldShow ? $('.loading-page').addClass('active') : $('.loading-page').removeClass('active');
+}
+
+// Utility function in sorting project entries
+function compareProjectDates(a, b) {
+  const openingA = a.fields.openingDate;
+  const openingB = b.fields.openingDate;
+
+  var comparison = 0;
+  if (openingA > openingB) {
+    comparison = 1;
+  } else if (openingA < openingB) {
+    comparison = -1;
+  }
+  return comparison * -1;
 }
