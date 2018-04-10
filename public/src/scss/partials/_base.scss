@@ -73,6 +73,22 @@ p {
     }
 }
 
+button {
+    border-color: #00f;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    color: #00f;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    padding-bottom: 2px;
+    position: relative;
+    transition: border 300ms ease-in-out;
+
+    &:hover {
+        border-style: dashed;
+    }
+}
+
 .background-container {
     display: none;
     position: fixed;
