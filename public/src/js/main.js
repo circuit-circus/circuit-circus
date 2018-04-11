@@ -137,7 +137,7 @@ function insertSingleProjectData(data) {
     $('.projects-single-video-container video').off('click');
     $('.projects-single-video-container .mute').off('click');
     if(data.project.fields.video !== undefined && data.project.fields.video !== null && data.project.fields.video.length > 0) {
-        var vidElem = $('.projects-single-video-container .video-wrapper');
+        var vidElem = $('.projects-single-video-container .video-wrapper-template');
         for(var i in data.project.fields.video) {
             var vidDat = data.project.fields.video[i];
             var newVid = vidElem.clone();

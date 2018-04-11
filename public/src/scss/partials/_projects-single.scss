@@ -172,6 +172,11 @@
 
 		.projects-single-img-description {
 			right: 10px;
+
+			@media screen and (max-width: 480px) {
+				left: 10px;
+				right: unset;
+			}
 		}
 
 		@media screen and (max-width: 480px) {

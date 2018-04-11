@@ -28,13 +28,13 @@ body {
 }
 
 h1 {
+    color: #0000ff;
     font-weight: 900;
     font-size: 12rem;
     letter-spacing: 2px;
     line-height: 1;
     margin-bottom: 0;
-
-    color: #0000ff;
+    word-break: break-word;
 
     @media screen and (max-width: 1024px) {
         font-size: 6rem;
@@ -46,12 +46,16 @@ h1 {
 }
 
 h2 {
+    color: #0000ff;
     font-weight: 900;
     font-size: 4rem;
     line-height: 1;
     letter-spacing: 1px;
+    word-break: break-word;
 
-    color: #0000ff;
+    @media screen and (max-width: 480px) {
+        font-size: 2.5rem;
+    }
 }
 
 h3 {
