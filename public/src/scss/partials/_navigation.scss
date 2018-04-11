@@ -35,15 +35,22 @@ nav {
         span {
             background-color: #fff;
             padding: 0.5rem;
+
+            transition: transform 300ms ease-in-out;
         }
 
-        &:not(:first-of-type):hover span, &:not(:first-of-type).active span {
+        &:not(:first-of-type):hover span {
             display: inline-block;
-            transform: rotate(30deg);
+            transform: rotate(45deg);
+        }
+
+        &:not(:first-of-type).active span {
+            display: inline-block;
+            transform: rotate(180deg);
         }
 
         &:not(:first-of-type):hover.active span {
-            transform: rotate(60deg);
+            transform: rotate(235deg);
         }
     }
 }

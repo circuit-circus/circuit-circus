@@ -67,16 +67,42 @@
 		justify-content: center;
 
 		.mute {
+			background-color: white;
+			background-size: 24px;
+			border: none;
+			bottom: calc(1.5rem + 12px);
 			cursor: pointer;
 			display: inline;
-			margin: .25rem 0 1rem 0;
+			height: 24px;
+			margin: .25rem 0 0 0;
 			padding: 0;
+			position: absolute;
+			right: 12px;
+			transition: none;
+			width: 24px;
+
+			&:hover {
+				outline: 1px solid #00f;
+			}
+
+			&.unmuted {
+				background-image: url('../images/icons/volume_on.png');
+			}
+
+			&.muted {
+				background-image: url('../images/icons/volume_off.png');
+			}
 		}
+	}
+
+	.video-wrapper-template {
+		display: none;
 	}
 
 	video {
 		cursor: pointer;
 		height: auto;
+		margin-bottom: 1.5rem;
 		width: 100%;
 
 		&:hover {
@@ -86,40 +112,75 @@
 }
 
 .projects-single-img-container .projects-single-img {
-	border: 0 solid #00f;
 	box-sizing: border-box;
 	margin-bottom: 5px;
 	position: relative;
-	transition: all 300ms ease-in-out;
 
 	img {
-		width: 100%;
-		height: auto;
+		background-color: #00f;
+		border: 0 solid #00f;
+		height: 512px;
+		transition: all 300ms ease-in-out;
+		width: auto;
+
+		&:hover {
+			border: 6px solid #00f;
+		}
+
+		@media screen and (max-width: 1024px) {
+		    height: 360px;
+		    max-width: 900px;
+		}
+
+		@media screen and (max-width: 720px) {
+			height: auto;
+			width: 100%;
+		}
+
+		@media screen and (max-width: 480px) {
+			height: auto;
+			width: 100%;
+		}
 	}
 
 	.projects-single-img-description {
 		position: absolute;
 		bottom: 20px;
-		left: 10px;
 		background-color: #fff;
 		padding: 2px 7px;
 		font-size: 10px;
 		letter-spacing: 1px;
 	}
-}
 
-.projects-single-img-container .projects-single-img:nth-child(odd) {
-	transform: translateX(-30px);
-}
+	&:nth-child(odd) {
+		text-align: left;
+		transform: translateX(-30px);
 
-.projects-single-img-container .projects-single-img:nth-child(even) {
-	transform: translateX(30px);
-}
+		.projects-single-img-description {
+			left: 10px;
+		}
 
-.projects-single-img-container .projects-single-img:hover {
-	border: 6px solid #00f;
-}
+		@media screen and (max-width: 480px) {
+			text-align: center;
+			transform: translateX(0px);
+		}
+	}
 
-.projects-single-img-container .projects-single-img::last-of-type {
-	margin-bottom: 2rem;
+	&:nth-child(even) {
+		text-align: right;
+		transform: translateX(30px);
+
+		.projects-single-img-description {
+			right: 10px;
+		}
+
+		@media screen and (max-width: 480px) {
+			text-align: center;
+			transform: translateX(0px);
+		}
+	}
+
+	&::last-of-type {
+		margin-bottom: 2rem;
+	}
 }

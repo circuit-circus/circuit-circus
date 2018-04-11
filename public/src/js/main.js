@@ -97,7 +97,7 @@ function insertProjectsData(data, targetSection) {
         var article = $(targetSection).find('article.template').clone();
         var permalink = $(article).find('.projects-item-permalink').attr('href', '#projects/' + element.fields.slug).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
         if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
-            $(article).find('.projects-item-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
+            $(article).find('.projects-item-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + '?w=1024)');
         }
         $(article).find('.projects-item-title').text(element.fields.title)
         $(article).find('.projects-item-paragraph').text(element.fields.leadParagraph);
@@ -126,7 +126,7 @@ function getSingleProject(slug, callback) {
 }
 
 function insertSingleProjectData(data) {
-    var project = $('.projects-single-template');
+    var project = $('.projects-single-template').clone();
     project.find('.projects-single-title').text(data.project.fields.title);
     project.find('.projects-single-lead').text(data.project.fields.leadParagraph);
 
@@ -137,16 +137,19 @@ function insertSingleProjectData(data) {
     $('.projects-single-video-container video').off('click');
     $('.projects-single-video-container .mute').off('click');
     if(data.project.fields.video !== undefined && data.project.fields.video !== null && data.project.fields.video.length > 0) {
-        var vidElem = $('<div class="video-wrapper"><video src="" autoplay loop></video><button class="mute">Turn sound on</button></div>');
+        var vidElem = $('.projects-single-video-container .video-wrapper');
         for(var i in data.project.fields.video) {
             var vidDat = data.project.fields.video[i];
             var newVid = vidElem.clone();
             newVid.find('video').attr('src', vidDat.fields.file.url);
             project.find('.projects-single-video-container').append(newVid);
             newVid.find('video').get(0).muted = true;
+            newVid.removeClass('video-wrapper-template');
         }
     }
-    $('.projects-single-video-container video').on('click', function() {
+
+    $('body').on('click', '.projects-single-video-container .video-wrapper video', function(e) {
+        e.preventDefault();
         var vidElem = $(this).get(0);
         if(vidElem.paused) {
             vidElem.play();
@@ -155,16 +158,16 @@ function insertSingleProjectData(data) {
             vidElem.pause();
         }
     });
-    $('.projects-single-video-container .mute').on('click', function() {
+    $('body').on('click', '.projects-single-video-container .video-wrapper .mute', function(e) {
+        e.preventDefault();
         var vidElem = $(this).siblings('video').get(0);
-        console.log(vidElem);
         if(vidElem.muted) {
             vidElem.muted = false;
-            $(this).text('Turn sound off');
+            $(this).addClass('unmuted').removeClass('muted');
         }
         else {
             vidElem.muted = true;
-            $(this).text('Turn sound on');
+            $(this).addClass('muted').removeClass('unmuted');
         }
     });
 
@@ -174,15 +177,16 @@ function insertSingleProjectData(data) {
         for(var i in data.project.fields.gallery) {
             var imgDat = data.project.fields.gallery[i];
             var newImg = imgElem.clone();
-            newImg.find('img').attr('src', imgDat.fields.file.url);
+            newImg.find('img').attr('src', imgDat.fields.file.url + '?w=1024');
             if(imgDat.fields.description && imgDat.fields.description.length > 0) {
                 newImg.append($('<span class="projects-single-img-description"></span>').text(imgDat.fields.description));
             }
             project.find('.projects-single-img-container').append(newImg);
         }
     }
+    console.log(project);
 
-    project.removeClass('.projects-single-template').addClass('projects-single').attr('id', data.project.fields.slug);
+    project.removeClass('projects-single-template').addClass('projects-single').attr('id', data.project.fields.slug);
     $('.projects-single-section .page-content').html(project);
     $('.projects-single-section').removeClass('not-loaded').addClass('loaded').scrollTop(0);
 }

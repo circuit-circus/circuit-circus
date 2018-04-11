@@ -36,12 +36,13 @@ h1 {
 
     color: #0000ff;
 
-    /*
-    span {
-        color: #fff;
-        background-color: #0000ff;
+    @media screen and (max-width: 1024px) {
+        font-size: 6rem;
     }
-    */
+
+    @media screen and (max-width: 720px) {
+        font-size: 4rem;
+    }
 }
 
 h2 {
