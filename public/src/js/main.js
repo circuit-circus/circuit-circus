@@ -95,11 +95,11 @@ function insertProjectsData(data, targetSection) {
 
     data.forEach(function(element) {
         var article = $(targetSection).find('article.template').clone();
-        var permalink = $(article).find('.projects-item-permalink').attr('href', '#projects/' + element.fields.slug).text(element.fields.title).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
+        var permalink = $(article).find('.projects-item-permalink').attr('href', '#projects/' + element.fields.slug).attr('data-slug', element.fields.slug).attr('data-name', element.fields.title);
         if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
             $(article).find('.projects-item-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + ')');
         }
-        $(article).find('.projects-item-title').append(permalink);
+        $(article).find('.projects-item-title').text(element.fields.title)
         $(article).find('.projects-item-paragraph').text(element.fields.leadParagraph);
         $(article).removeClass('template');
         $(targetSection).find('.page-content').append(article);

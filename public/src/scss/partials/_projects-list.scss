@@ -1,0 +1,40 @@
+.projects-list-item {
+    width: 100%;
+    margin-right: 3rem;
+    margin-bottom: 2rem;
+    padding: 1rem 2rem 0;
+
+    overflow: hidden;
+    vertical-align: top;
+
+    background-color: #fff;
+
+    .projects-item-cover-image {
+        width: 100%;
+        padding-bottom: 50%;
+        background-size: cover;
+        background-position: center center;
+
+        background-color: #eaeaea;
+    }
+
+    .projects-item-title {
+        position: relative;
+        top: -25px;
+        left: 15px;
+        letter-spacing: 2px;
+        background: #ffffff;
+        color: #0000ff;
+        padding: 0 5px;
+        display: inline-block;
+    }
+
+    .projects-item-paragraph {
+        padding: 5px 25px 5px 20px;
+        font-size: 20px;
+    }
+
+    &.template {
+        display: none;
+    }
+}
