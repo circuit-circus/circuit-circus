@@ -28,8 +28,17 @@ nav {
 
         font-weight: 700;
 
+        @media screen and (max-width: 412px) {
+            display: inline-block;
+            margin-bottom: 10px;
+            top: -10px;
+        }
+
         &:first-of-type {
             padding: 0;
+            @media screen and (max-width: 412px) {
+                top: 0px;
+            }
         }
 
         span {
