@@ -1,37 +1,51 @@
 .projects-list-item {
     width: 100%;
-    margin-right: 3rem;
-    margin-bottom: 2rem;
-    padding: 1rem 2rem 0;
+    margin-bottom: 4rem;
 
     overflow: hidden;
     vertical-align: top;
 
     background-color: #fff;
+    text-align: center;
+
+    @media screen and (max-width: 480px) {
+        margin-bottom: 2rem;
+    }
 
     .projects-item-cover-image {
         width: 100%;
-        padding-bottom: 50%;
-        background-size: cover;
+        padding-bottom: 30%;
+        background-size: contain;
         background-position: center center;
 
         background-color: #eaeaea;
+
+        @media screen and (max-width: 480px) {
+            padding-bottom: 50%;
+        }
     }
 
     .projects-item-title {
         position: relative;
         top: -25px;
-        left: 15px;
         letter-spacing: 2px;
         background: #ffffff;
         color: #0000ff;
-        padding: 0 5px;
+        padding: 5px 10px 0;
         display: inline-block;
+        max-width: 90%;
     }
 
     .projects-item-paragraph {
-        padding: 5px 25px 5px 20px;
         font-size: 20px;
+        padding: 0px 20px;
+        position: relative;
+        top: -10px;
+
+        @media screen and (max-width: 480px) {
+            font-size: 16px;
+            text-align: justify;
+        }
     }
 
     &.template {
