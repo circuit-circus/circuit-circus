@@ -1,3 +1,15 @@
+@keyframes jumpy {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+         transform: translateY(-10px);
+    }
+    100% {
+         transform: translateY(0px);
+    }
+}
+
 nav {
     text-align: center;
     padding: 1rem;
@@ -14,7 +26,18 @@ nav {
         height: 100px;
         display: inline-block;
         margin: 0 auto;
+        transform: scale(1);
+        transition: transform 500ms ease-in-out;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &.logo-white {
+            filter: saturate(0) invert(100%);
+        }
     }
+
 
     .nav-item {
         box-sizing: border-box;
@@ -25,7 +48,8 @@ nav {
         position: relative;
         margin: 0 5px;
         pointer-events: auto;
-
+        display: inline-block;
+       
         font-weight: 700;
 
         @media screen and (max-width: 412px) {
@@ -38,6 +62,19 @@ nav {
             @media screen and (max-width: 412px) {
                 top: 0px;
             }
+        }
+
+        &:nth-child(3) {
+            animation: jumpy 2s ease-in-out 0s infinite running;
+        }
+        &:nth-child(4) {
+            animation: jumpy 2s ease-in-out .5s infinite running;
+        }
+        &:nth-child(5) {
+            animation: jumpy 2s ease-in-out 1s infinite running;
+        }
+        &:nth-child(6) {
+            animation: jumpy 2s ease-in-out 1.5s infinite running;
         }
 
         span {

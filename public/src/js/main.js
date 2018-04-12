@@ -35,9 +35,14 @@ function goToCurrentPage() {
     }
     var currentPage = hash.substring(1, hash.length);
 
+    $('#nav-logo').removeClass('logo-white');
+
     if(currentPage.indexOf('projects/') === -1) {
         toggleLoading(true);
         goToPage(currentPage, false);
+        if(currentPage.includes('about')) {
+            $('#nav-logo').addClass('logo-white');
+        }
     }
     else {
         var currentProject = currentPage.substring('projects/'.length, currentPage.length);

@@ -71,12 +71,23 @@
         color: #fff;
 
         img {
+            cursor: url('images/icons/eyes.ico'), auto;
             width: 100%;
             height: auto;
         }
     }
 
     &[data-id='contact'] {
+        .mailus a {
+            + .emoji::after {
+                content: '🤓';
+                margin-left: .25rem;
+            }
+
+            &:hover + .emoji::after {
+                content: '😎';
+            }
+        }
     }
 
     .page-content {
