@@ -119,9 +119,11 @@
 	img {
 		background-color: #00f;
 		border: 0 solid #00f;
-		height: 512px;
+		height: auto;
+		max-height: 512px;
 		transition: all 300ms ease-in-out;
 		width: auto;
+		max-width: 800px;
 
 		&:hover {
 			border: 6px solid #00f;
