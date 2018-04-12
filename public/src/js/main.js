@@ -17,7 +17,6 @@ $(document).ready(function () {
         var target = $(this).attr('data-target');
 
         toggleLoading(true);
-        goToPage(target, true, this);
     });
 
     $('body').on('click', '.projects-item-permalink', function() {
