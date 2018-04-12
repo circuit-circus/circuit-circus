@@ -11,14 +11,6 @@ $(document).ready(function () {
         goToCurrentPage();
     }
 
-    // Navigation in main menu
-    $('.nav-item').on('click', function(event) {
-        event.stopPropagation();
-        var target = $(this).attr('data-target');
-
-        toggleLoading(true);
-    });
-
     $('body').on('click', '.projects-item-permalink', function() {
         var slug = $(this).attr('data-slug');
         toggleLoading(true);
