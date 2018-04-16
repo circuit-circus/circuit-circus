@@ -25,6 +25,12 @@ body {
 
     font-family: 'Montserrat', sans-serif;
     line-height: 1.75;
+
+    cursor: url('/images/bobs_cursor.png'), default;
+
+    a {
+        cursor: url('/images/bobs_cursor.png'), default;
+    }
 }
 
 h1 {
