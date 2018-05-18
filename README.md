@@ -4,37 +4,37 @@
 
 ✨ 🎪 🎪 🎪 ✨
 
-### Update May 19 2017 ###
+### Update May 19 2017
 Rewrote the site using EJS and SCSS instead of Jade and LESS
 
-#### Update May 24 2016 ####
+#### Update May 24 2016
 Removed old develop branch (was a mess anyway), in order to start fresh and use Git Flow for features n stuff, rather than random cluttered work on develop.  
 
 
-## Repo structure 🌲🌳 ##
+## Repo structure 🌲🌳
 
 Our model is based on [Git Flow](http://nvie.com/posts/a-successful-git-branching-model/), and at some point we should probably implement it completely 😅😅 For now, we structure the repo like this:
 
-** develop **  
+*develop*
 branch for gathering features, etc., which we will merge into the *master* branch.  
 develop branch should be working at all times
 
-** features **  
+*features*
 used for all new things. merges into develop when they're done.
 
-** master **  
+*master*
 aka Production branch. Everything that gets pushed to here will be live!! Be careful! 🙏 Don't merge develop into it, if develop doesn't work 100%
 
-** hotfixes **  
+*hotfixes*
 quick and dirty fixes, merges directly to both develop and master
 
 
-## App info 👌✨️##
+## App info 👌✨
 
 We use [ExpressJS](http://expressjs.com/).  
  [EJS](http://www.embeddedjs.com/) is used for templating.
 
-### Setting up the project ###
+### Setting up the project
 - Download the repo, navigate to it, and run *npm install* in the terminal  
 (make sure you have node installed first)
 
