@@ -130,8 +130,8 @@ function insertSingleProjectData(data) {
     project.find('.projects-single-body').html(bodyHtml);
 
     $('.projects-single-section .projects-single-video-container').html(''); // Clear old videos before adding new one
-    $('.projects-single-video-container video').off('click');
-    $('.projects-single-video-container .mute').off('click');
+    $('body').off('click', '.projects-single-video-container .video-wrapper video');
+    $('body').off('click', '.projects-single-video-container .video-wrapper .mute');
     if(data.project.fields.video !== undefined && data.project.fields.video !== null && data.project.fields.video.length > 0) {
         var vidElem = $('.projects-single-video-container .video-wrapper-template');
         for(var i in data.project.fields.video) {
