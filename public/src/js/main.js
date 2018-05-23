@@ -64,6 +64,8 @@ function goToPage(target, fromMenu) {
     $('.nav-item.active').removeClass('active');
     $('.nav-item[data-target="' + target + '"]').addClass('active');
 
+    $('.projects-single-section .projects-single-video-container').html(''); // Clear old videos before adding new one
+
     // If this is the projects page user is trying to navigate to, load these
     if( (target == 'projects') && targetSection.hasClass('not-loaded')) {
         $.ajax({
@@ -170,13 +172,12 @@ function insertSingleProjectData(data) {
     $('body').on('click', '.projects-single-video-container .video-wrapper .fullscreen', function(e) {
         e.preventDefault();
         var vidElem = $(this).siblings('video').get(0);
-        var elem = document.getElementById("myvideo");
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) {
-            elem.webkitRequestFullscreen();
+        if (vidElem.requestFullscreen) {
+            vidElem.requestFullscreen();
+        } else if (vidElem.mozRequestFullScreen) {
+            vidElem.mozRequestFullScreen();
+        } else if (vidElem.webkitRequestFullscreen) {
+            vidElem.webkitRequestFullscreen();
         }
     });
 
