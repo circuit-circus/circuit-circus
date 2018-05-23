@@ -66,7 +66,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 
-		.mute {
+		button {
 			background-color: white;
 			background-size: 24px;
 			border: none;
@@ -77,20 +77,27 @@
 			margin: .25rem 0 0 0;
 			padding: 0;
 			position: absolute;
-			right: 12px;
 			transition: none;
 			width: 24px;
 
+			&.mute {
+				right: 12px;
+
+				&.unmuted {
+					background-image: url('../images/icons/volume_on.png');
+				}
+
+				&.muted {
+					background-image: url('../images/icons/volume_off.png');
+				}
+			}
+
+			&.fullscreen {
+				right: 48px;
+			}
+
 			&:hover {
 				outline: 1px solid #00f;
-			}
-
-			&.unmuted {
-				background-image: url('../images/icons/volume_on.png');
-			}
-
-			&.muted {
-				background-image: url('../images/icons/volume_off.png');
 			}
 		}
 	}

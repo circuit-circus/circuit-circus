@@ -132,6 +132,7 @@ function insertSingleProjectData(data) {
     $('.projects-single-section .projects-single-video-container').html(''); // Clear old videos before adding new one
     $('body').off('click', '.projects-single-video-container .video-wrapper video');
     $('body').off('click', '.projects-single-video-container .video-wrapper .mute');
+    $('body').off('click', '.projects-single-video-container .video-wrapper .fullscreen');
     if(data.project.fields.video !== undefined && data.project.fields.video !== null && data.project.fields.video.length > 0) {
         var vidElem = $('.projects-single-video-container .video-wrapper-template');
         for(var i in data.project.fields.video) {
@@ -164,6 +165,18 @@ function insertSingleProjectData(data) {
         else {
             vidElem.muted = true;
             $(this).addClass('muted').removeClass('unmuted');
+        }
+    });
+    $('body').on('click', '.projects-single-video-container .video-wrapper .fullscreen', function(e) {
+        e.preventDefault();
+        var vidElem = $(this).siblings('video').get(0);
+        var elem = document.getElementById("myvideo");
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
         }
     });
 
