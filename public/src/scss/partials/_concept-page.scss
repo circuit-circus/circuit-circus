@@ -1,0 +1,54 @@
+
+.concept-page {
+
+    font-family: 'Montesserat', sans-serif;
+
+    .concept-header {
+        width: 100%;
+        text-align: center;
+    }
+
+    #header-logo {
+        width: 100px;
+        margin: 20px;
+    }
+
+    .concept-page-container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    h1,
+    h2 {
+        text-align: center;
+        color: #000;
+        font-family: 'Lucida Console', monospace;
+        font-weight: 400;
+    }
+
+    h1 {
+        font-size: 56px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    .tagline {
+        text-align: center;
+        font-family: 'Lucida Console', monospace;
+    }
+
+    .moodboard-image-item {
+        width: calc(33.33% - 20px);
+        margin-right: 20px;
+        margin-bottom: 20px;
+        float: left;
+
+        padding-bottom: 20%;
+        background-size: cover;
+        background-position: center;
+    }
+}
