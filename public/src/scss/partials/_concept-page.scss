@@ -21,8 +21,8 @@
 
     h1,
     h2 {
+        color: #00f;
         text-align: center;
-        color: #000;
         font-family: 'Lucida Console', monospace;
         font-weight: 400;
     }
@@ -60,10 +60,7 @@
     }
 
     nav {
-        // Needs latest Compass, add '@import "compass"' to your scss
-        // Permalink - use to edit and share this gradient:
-        // http://colorzilla.com/gradient-editor/#13d9b2+0,056ced+100
-        background: linear-gradient(to bottom, #13d9b2 0%,#056ced 100%);
+        background: #00f;
         border-radius: 0 0.5rem 0.5rem 0;
         height: auto;
         left: 0;
@@ -81,11 +78,11 @@
 
             li {
                 padding: 0;
-                transition: background 300ms;
+                transition: transform 300ms;
 
                 a {
                     color: #fff;
-                    transition: color 300ms;
+                    transition: transform 300ms;
                 }
 
                 &:first-child {
@@ -101,9 +98,9 @@
                 }
 
                 &:hover {
-                    background: #fff;
+                    transform: translateX(20px);
                     a {
-                        color: #00f;
+                        // color: #00f;
                     }
                 }
             }
