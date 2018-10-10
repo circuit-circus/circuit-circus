@@ -14,7 +14,7 @@
     }
 
     .concept-page-container {
-        width: 90%;
+        width: 90vw;
         max-width: 1000px;
         margin: 0 auto;
     }
@@ -52,6 +52,16 @@
         padding-bottom: 20%;
         background-size: cover;
         background-position: center;
+
+        @media screen and (max-width: 1024px) {
+            padding-bottom: 33%;
+            width: calc(50% - 1.5rem);
+        }
+
+        @media screen and (max-width: 480px) {
+            padding-bottom: 50%;
+            width: calc(100% - 1.5rem);
+        }
     }
 
     .semeion-headline {
@@ -61,7 +71,8 @@
 
     nav {
         background: #00f;
-        border-radius: 0 0.5rem 0.5rem 0;
+        border-radius: 0 4px 4px 0;
+        font-size: 0.9rem;
         height: auto;
         left: 0;
         padding: 0;
@@ -69,7 +80,7 @@
         position: fixed;
         text-align: center;
         top: 30vh;
-        width: 10rem;
+        width: 10vw;
         z-index: 999;
     
         ul {
@@ -80,7 +91,22 @@
                 color: #fff;
                 transition: transform 300ms;
 
+                &:first-child {
+                    li {
+                        border-top-right-radius: 4px;
+                        padding-top: 0.25rem;
+                    }
+                }
+
+                &:last-child {
+                    li {
+                        border-bottom-right-radius: 4px;
+                        padding-bottom: 0.25rem;
+                    }
+                }
+
                 li {
+                    background: #00f;
                     padding: 0;
                     transition: transform 300ms;
 
@@ -90,5 +116,93 @@
                 }
             }
         }
+    }
+
+    .concept-video-container {
+        margin: 0 auto 5px auto;
+        position: relative;
+        width: 75%;
+
+        .video-wrapper {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            button {
+                background-color: white;
+                background-size: 24px;
+                border: none;
+                bottom: calc(1.5rem + 12px);
+                cursor: pointer;
+                display: inline;
+                height: 24px;
+                margin: .25rem 0 0 0;
+                padding: 0;
+                position: absolute;
+                transition: none;
+                width: 24px;
+
+                &.mute {
+                    right: 12px;
+
+                    &.unmuted {
+                        background-image: url('/images/icons/volume_on.png');
+                    }
+
+                    &.muted {
+                        background-image: url('/images/icons/volume_off.png');
+                    }
+                }
+
+                &.fullscreen {
+                    right: 48px;
+                    background-image: url('/images/icons/fullscreen.png');
+                }
+
+                &:hover {
+                    outline: 1px solid #00f;
+                }
+            }
+        }
+
+        video {
+            cursor: pointer;
+            height: auto;
+            margin-bottom: 1.5rem;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+
+    #downloads p {
+        text-align: center;
+    }
+
+    #downloads a {
+        color: #000;
+        display: inline-block;
+        position: relative;
+        transition: all 300ms ease-in-out;
+    }
+
+    #downloads a::before {
+        background: transparent;
+        bottom: -2px;
+        border-color: #00f;
+        border-style: solid;
+        border-width: 0 0 2px 0;
+        content: '';
+        left: 0px;
+        height: 100%;
+        position: absolute;
+        transition: all 300ms ease-in-out;
+        width: 100%;
+    }
+
+    #downloads a:hover::before {
+        transform: translateY(-90%);
     }
 }
