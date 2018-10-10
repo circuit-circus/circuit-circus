@@ -2,6 +2,7 @@
 .concept-page {
 
     font-family: 'Montserrat', sans-serif;
+    margin-bottom: 5rem;
 
     .concept-header {
         width: 100%;
@@ -49,8 +50,6 @@
         margin-bottom: 1.5rem;
         float: left;
         
-        padding-left: 25%;
-        padding-right: 25%;
         padding-bottom: 20%;
         background-size: cover;
         background-position: center;
@@ -60,6 +59,8 @@
             width: calc(50% - 1.5rem);
 
             &:last-child {
+                padding-left: 25%;
+                padding-right: 25%;
                 width: calc(100% - 1.5rem);
             }
         }
@@ -214,5 +215,9 @@
 
     #downloads a:hover::before {
         transform: translateY(-90%);
+    }
+
+    #about h2 {
+        margin-top: 2rem;
     }
 }
