@@ -55,8 +55,8 @@
     }
 
     .semeion-headline {
-        border-bottom: 2px solid #000;
-        margin-bottom: 1rem;
+        border-bottom: 1px solid #00f;
+        margin-bottom: 1.5rem;
     }
 
     nav {
@@ -76,31 +76,16 @@
             margin: 0;
             padding: 0;
 
-            li {
-                padding: 0;
+            a {
+                color: #fff;
                 transition: transform 300ms;
 
-                a {
-                    color: #fff;
+                li {
+                    padding: 0;
                     transition: transform 300ms;
-                }
 
-                &:first-child {
-                    a {
-                        padding-top: 1rem;
-                    }
-                }
-
-                &:last-child {
-                    a {
-                        padding-bottom: 1rem;
-                    }
-                }
-
-                &:hover {
-                    transform: translateX(20px);
-                    a {
-                        // color: #00f;
+                    &:hover {
+                        transform: translateX(20px);
                     }
                 }
             }
