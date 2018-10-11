@@ -34,7 +34,6 @@
     }
 
     h2 {
-        clear: both;
         font-size: 26px;
         margin-bottom: 1.5rem;
     }
@@ -186,6 +185,24 @@
                 opacity: 0.9;
             }
         }
+    }
+
+    #sketches {
+        p {
+            text-align: center;
+        }
+
+        img {
+            width: 49%;
+
+            &:nth-child(even) {
+                border-right: 3px solid #00f;
+            }
+        }
+    }
+
+    #downloads {
+        clear: both;
     }
 
     #downloads p {
