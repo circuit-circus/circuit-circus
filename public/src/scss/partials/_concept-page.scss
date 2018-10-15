@@ -148,62 +148,14 @@
         }
     }
 
-    .concept-video-container {
-        margin: 0 auto 5px auto;
+    .audio-player {
+        margin: 0 auto 2rem auto;
         position: relative;
+        text-align: center;
         width: 75%;
 
-        .video-wrapper {
-            align-items: center;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            button {
-                background-color: white;
-                background-size: 24px;
-                border: none;
-                bottom: calc(1.5rem + 12px);
-                cursor: pointer;
-                display: inline;
-                height: 24px;
-                margin: .25rem 0 0 0;
-                padding: 0;
-                position: absolute;
-                transition: none;
-                width: 24px;
-
-                &.mute {
-                    right: 12px;
-
-                    &.unmuted {
-                        background-image: url('/images/icons/volume_on.png');
-                    }
-
-                    &.muted {
-                        background-image: url('/images/icons/volume_off.png');
-                    }
-                }
-
-                &.fullscreen {
-                    right: 48px;
-                    background-image: url('/images/icons/fullscreen.png');
-                }
-
-                &:hover {
-                    outline: 1px solid #00f;
-                }
-            }
-        }
-
-        video {
-            cursor: pointer;
-            height: auto;
-            margin-bottom: 1.5rem;
-
-            &:hover {
-                opacity: 0.9;
-            }
+        audio {
+            width: 100%;
         }
     }
 
