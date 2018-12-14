@@ -1,0 +1,32 @@
+body #cookie-bar {
+	background: yellow;
+	padding: 15px 10px;
+
+	p {
+		font-size: 14px;
+		font-family: 'Roboto Mono', monospace;
+		color: #000;
+	}
+
+	#cookie-bar-button,
+	#cookie-bar-button-no {
+		border-radius: 2px;
+		border-bottom: none;
+		text-shadow: none;
+		font-weight: 400;
+		font-family: 'Roboto Mono', monospace;
+		padding: 8px 12px;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	#cookie-bar-button {
+		background-color: #000;
+	}
+
+	#cookie-bar-button-no {
+		background-color: #000;
+	}
+}

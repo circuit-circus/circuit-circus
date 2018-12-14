@@ -26,6 +26,15 @@ $(document).ready(function () {
         var name = $(this).data('name');
         $('.background-container[data-name="' + name + '"]').removeClass('active');
     });
+
+    // Cookie consent
+    var cookieValue = document.cookie.match(/(;)?cookiebar=([^;]*);?/);
+    if(cookieValue && cookieValue[2]) {
+        if (cookieValue[2] == 'CookieAllowed') {
+            loadGoogleAnalytics();
+        }
+    }
+
 });
 
 function goToCurrentPage() {
@@ -221,4 +230,25 @@ function compareProjectDates(a, b) {
     comparison = -1;
   }
   return comparison * -1;
+}
+
+function loadGoogleAnalytics() {
+    if (typeof someObject == 'undefined') $.loadScript('https://www.googletagmanager.com/gtag/js?id=UA-74656126-1', function(){
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-74656126-1', { 'anonymize_ip': true });
+        gtag('send', 'pageview');
+
+    }); 
+}
+
+jQuery.loadScript = function (url, callback) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'script',
+        success: callback,
+        async: true
+    });
 }
