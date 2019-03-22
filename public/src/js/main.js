@@ -46,12 +46,15 @@ function goToCurrentPage() {
 
     $('#nav-logo').removeClass('logo-white');
 
-    if(currentPage.indexOf('projects/') === -1) {
+    if(currentPage.includes('pages/')) {
+        var currentProject = currentPage.substring('pages/'.length, currentPage.length);
+        toggleLoading(true);
+        getSinglePage(currentProject, showSinglePage);
+        goToPage(currentPage, false);
+    }
+    else if(currentPage.indexOf('projects/') === -1) {
         toggleLoading(true);
         goToPage(currentPage, false);
-        if(currentPage.includes('about')) {
-            $('#nav-logo').addClass('logo-white');
-        }
     }
     else {
         var currentProject = currentPage.substring('projects/'.length, currentPage.length);
@@ -62,6 +65,8 @@ function goToCurrentPage() {
 }
 
 function goToPage(target, fromMenu) {
+    $('.page-section').attr('page-id', '');
+
     var targetSection = $('.page-section[data-id="' + target + '"]');
     if(!targetSection.length) {
         console.error('Error: Page Section length is ' + targetSection.length);
@@ -76,7 +81,7 @@ function goToPage(target, fromMenu) {
     $('.projects-single-section .projects-single-video-container').html(''); // Clear old videos before adding new one
 
     // If this is the projects page user is trying to navigate to, load these
-    if( (target == 'projects') && targetSection.hasClass('not-loaded')) {
+    if( (target === 'projects') && targetSection.hasClass('not-loaded')) {
         $.ajax({
             url: '/' + target,
         }).done(function(data) {
@@ -93,11 +98,6 @@ function goToPage(target, fromMenu) {
 
 // Insert projects data
 function insertProjectsData(data, targetSection) {
-
-    // TO DO : Add loading spinner or something
-
-    // console.log(data);
-
     var bgContainer = $('.background-container');
 
     data.forEach(function(element) {
@@ -212,6 +212,34 @@ function insertSingleProjectData(data) {
 
 function showSingleProject() {
     $('.projects-single-section').addClass('active');
+}
+
+function getSinglePage(slug, callback) {
+    $.ajax({
+        url: '/pages/' + slug,
+    }).done(function(data) {
+        insertSinglePageData(data);
+        toggleLoading(false);
+        if(slug.includes('about')) {
+            $('#nav-logo').addClass('logo-white');
+        }
+        callback();
+    });
+}
+
+function insertSinglePageData(data) {
+    var project = $('.page-single-template').clone();
+    project.find('.page-single-body').html(marked(data.page.fields.body));
+    project.removeClass('page-single-template').addClass('page-single').attr('id', data.page.fields.slug);
+
+    $('.page-single-section .page-content').html(project);
+    $('.page-single-section').removeClass('not-loaded').addClass('loaded').scrollTop(0);
+
+    $('.page-section').attr('page-id', data.page.fields.slug);
+}
+
+function showSinglePage() {
+    $('.page-single-section').addClass('active');
 }
 
 function toggleLoading(shouldShow) {
