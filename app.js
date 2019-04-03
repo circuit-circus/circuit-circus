@@ -19,7 +19,7 @@ var projects = require('./routes/projects.js');
 var pages = require('./routes/pages.js');
 //var workshops = require('./routes/workshops.js');
 var rerouter = require('./routes/rerouter.js');
-var togglbot = require('./routes/togglbot_final.js');
+var togglbot = require('./routes/togglbot.js');
 
 app.use('/', index);
 app.use('/togglbot', togglbot.router);
