@@ -100,7 +100,7 @@ slackEvents.on('message', (event, body) => {
           if (commands[0] === 'start') {
               if(commands.length < 3) {
                 // Let the user and back-end know that they need to add a description.
-                let descripMsg = `:grimacing: You need to add a description before I can start a timer.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start Precis Buying supplies.\``;
+                let descripMsg = `:grimacing: You need to add a description before I can start a timer.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
                 console.log(descripMsg);
                 slack.chat.postMessage({ channel: event.channel, text: descripMsg }).catch(console.error);
                 return;
@@ -187,7 +187,7 @@ slackEvents.on('message', (event, body) => {
                       }
                       else {
                         // If there is no timer, then let the user and back-end know
-                        let errorMsg = `:fearful: You don't seem to have an active timer right now.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start Precis Buying supplies.\``;
+                        let errorMsg = `:fearful: You don't seem to have an active timer right now.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
                         console.log(errorMsg);
                         slack.chat.postMessage({ channel: event.channel, text: errorMsg }).catch(console.error);
                       }
@@ -196,7 +196,7 @@ slackEvents.on('message', (event, body) => {
                   console.error(error);
               }
           } else {
-              let errorMsg = `Hmmm... :thinking_face: I don't know that command.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start Precis Buying supplies.\``;
+              let errorMsg = `Hmmm... :thinking_face: I don't know that command.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
               console.log(errorMsg);
 
               // Respond to the message back in the same channel
