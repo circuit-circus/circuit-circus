@@ -80,6 +80,13 @@ slackEvents.on('message', (event, body) => {
               userLookup[userId].togglObj = new TogglClient({ apiToken: userLookup[userId].togglAPIToken });
           }
       }
+      else {
+        let apiMsg = `:slightly_frowning_face: I don't know who you are...\nMake sure that your Toggl API Key has been added to my setup. Ask @jepsterdk for help, if need be.`;
+        console.log(apiMsg);
+        slack.chat.postMessage({ channel: event.channel, text: apiMsg }).catch(console.error);
+
+        return;
+      }
 
       // Init slack client
       const slack = getSlackClient(body.team_id);
