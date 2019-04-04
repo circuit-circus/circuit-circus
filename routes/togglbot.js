@@ -130,15 +130,17 @@ slackEvents.on('message', (event, body) => {
                           console.log(startMsg);
                           slack.chat.postMessage({ channel: event.channel, text: startMsg }).catch(console.error);
 
-                          // Send a timer reminder after each 8 hours
-                          userLookup[userId].togglReminder = setInterval(function() {
-                              userLookup[userId].reminderCount++;
+                          // Send a timer reminder after each 8 hours, but only if it has not been added yet
+                          if(userLookup[userId].togglReminder._idleTimeout !== -1) {
+                            userLookup[userId].togglReminder = setInterval(function() {
+                                userLookup[userId].reminderCount++;
 
-                              // Respond to the message back in the same channel
-                              let reminderMsg = `Hey there <@${event.user}>.\nYou haven\'t stopped this timer, even though it has already been ` + ((togglReminderLength / 1000 / 60 / 60) * userLookup[userId].reminderCount) + ` hours ago! :stopwatch:`;
-                              console.log(reminderMsg);
-                              slack.chat.postMessage({ channel: event.channel, text: reminderMsg }).catch(console.error);
-                          }, togglReminderLength)
+                                // Respond to the message back in the same channel
+                                let reminderMsg = `Hey there <@${event.user}>.\nYou haven\'t stopped this timer, even though it has already been ` + ((togglReminderLength / 1000 / 60 / 60) * userLookup[userId].reminderCount) + ` hours ago! :stopwatch:`;
+                                console.log(reminderMsg);
+                                slack.chat.postMessage({ channel: event.channel, text: reminderMsg }).catch(console.error);
+                            }, togglReminderLength)
+                          }
                       })
                   } catch (error) {
                       console.error(error);
