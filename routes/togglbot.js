@@ -131,7 +131,7 @@ slackEvents.on('message', (event, body) => {
                           slack.chat.postMessage({ channel: event.channel, text: startMsg }).catch(console.error);
 
                           // Send a timer reminder after each 8 hours, but only if it has not been added yet
-                          if(userLookup[userId].togglReminder._idleTimeout !== -1) {
+                          if(userLookup[userId].togglReminder === null || userLookup[userId].togglReminder._idleTimeout !== -1) {
                             userLookup[userId].togglReminder = setInterval(function() {
                                 userLookup[userId].reminderCount++;
 
