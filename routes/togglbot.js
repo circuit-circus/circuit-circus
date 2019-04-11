@@ -123,23 +123,18 @@ slackEvents.on('message', (event, body) => {
                           pid: projectId
                       }, function(err, timeEntry) {
                           // handle error
-                          if (err) throw err;
-
-                          // Let the user and back-end know that we did good.
-                          let startMsg = `Alright.\n:arrow_forward: I started a timer with the description \`` + description + `\` on the project called \`` + projectName + `\`.`;
-                          console.log(startMsg);
-                          slack.chat.postMessage({ channel: event.channel, text: startMsg }).catch(console.error);
-
-                          // Send a timer reminder after each 8 hours, but only if it has not been added yet
-                          if(userLookup[userId].togglReminder === null || userLookup[userId].togglReminder._idleTimeout !== -1) {
-                            userLookup[userId].togglReminder = setInterval(function() {
-                                userLookup[userId].reminderCount++;
-
-                                // Respond to the message back in the same channel
-                                let reminderMsg = `Hey there <@${event.user}>.\nYou haven\'t stopped this timer, even though it has already been ` + ((togglReminderLength / 1000 / 60 / 60) * userLookup[userId].reminderCount) + ` hours ago! :stopwatch:`;
-                                console.log(reminderMsg);
-                                slack.chat.postMessage({ channel: event.channel, text: reminderMsg }).catch(console.error);
-                            }, togglReminderLength)
+                          if (!err) {
+                            // Let the user and back-end know that we did good.
+                            let startMsg = `Alright.\n:arrow_forward: I started a timer with the description \`` + description + `\` on the project called \`` + projectName + `\`.`;
+                            console.log(startMsg);
+                            slack.chat.postMessage({ channel: event.channel, text: startMsg }).catch(console.error);
+                          }
+                          else {
+                            console.log(err.message);
+                            // Let the user and back-end know what we can't find the project under this user
+                            let noProjectMsg = `Oh. :anguished: I don't think you can access project \`` + projectName + `\`. Go to Toggl to check if the project is public, or if you're assigned to it.`;
+                            console.log(noProjectMsg);
+                            slack.chat.postMessage({ channel: event.channel, text: noProjectMsg }).catch(console.error);
                           }
                       })
                   } catch (error) {
@@ -161,7 +156,8 @@ slackEvents.on('message', (event, body) => {
                   console.log(projectMsg);
                   slack.chat.postMessage({ channel: event.channel, text: projectMsg }).catch(console.error);
               })
-          } else if (commands[0] === 'stop') {
+          // Stop the timer, if the user writes 'stop', 'stahp' or 'stp'/'stooooop' (with as many or as few o's as they want)
+          } else if (commands[0] === 'stop' || commands[0] === 'stahp' || RegExp('sto*p').test(commands[0])) {
               try {
                   // First try to get the current time entry
                   userLookup[userId].togglObj.getCurrentTimeEntry((err, timeEntry) => {
@@ -241,6 +237,8 @@ function fetchProject(userId, txt) {
         }
     })
 }
+
+// TODO: Make a timer
 
 module.exports = {
     router: router,
