@@ -1,22 +1,33 @@
 .projects-list-item {
-    width: 100%;
-    margin-bottom: 4rem;
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto 4rem;
 
-    overflow: hidden;
+    //overflow: hidden;
     vertical-align: top;
 
     background-color: #fff;
-    text-align: center;
+    text-align: justify;
+
+    
+    @for $i from 1 through 8 {
+        &:nth-child(#{$i}) {
+            transform: rotate(#{random(10) - 5}deg);
+        }
+    }
 
     @media screen and (max-width: 480px) {
         margin-bottom: 2rem;
     }
 
     .projects-item-cover-image {
-        width: 100%;
-        padding-bottom: 30%;
+        width: 120%;
+        padding-bottom: 50%;
         background-size: contain;
         background-position: center center;
+
+        position: relative;
+        left: -10%;
 
         background-color: #eaeaea;
 
@@ -27,23 +38,54 @@
 
     .projects-item-title {
         position: relative;
-        top: -25px;
-        letter-spacing: 2px;
-        background: #ffffff;
+        //top: -25px;
+        //background: #ffffff;
         color: #0000ff;
-        padding: 5px 20px 0;
+        //padding: 5px 20px 0;
         display: inline-block;
         max-width: 90%;
+        
+        letter-spacing: 2px;
         text-transform: uppercase;
-        letter-spacing: 0.5rem;
         font-weight: 700;
+        font-size: 2em;
+        //margin: 1rem 0;
+        //padding-top: 2rem;
+
+        // &:before {
+        //     content: '';
+        //     display: block;
+        //     width: 200px;
+        //     height: 2px;
+        //     background-color: blue;
+        //     position: relative;
+        //     top: -1rem;
+        // }
+
+        &:before {
+            content: '';
+            display: inline-block;
+            color: black;
+            position: relative;
+        }
+
     }
 
     .projects-item-paragraph {
-        font-size: 20px;
-        padding: 0px 20px;
+        font-size: 16px;
+        //padding: 0px 20px;
         position: relative;
-        top: -10px;
+        //text-transform: uppercase;
+        //font-family: 'Work Sans';
+        line-height: 1.8rem;
+        text-align: justify;
+        width: 100%;
+
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 2em;
+        font-family: 'Montserrat', sans-serif;
 
         @media screen and (max-width: 480px) {
             font-size: 16px;
@@ -52,6 +94,14 @@
     }
 
     &.template {
+        display: none;
+    }
+
+    .projects-item-divider {
+        width: 100px;
+        height: 2px;
+        background-color: black;
+        margin-top: 2rem;
         display: none;
     }
 }
