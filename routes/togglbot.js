@@ -52,6 +52,8 @@ const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_
     includeBody: true
 });
 
+let slack;
+
 let client = null;
 let botAccessToken = process.env.TOGGLBOT_ACCESS_TOKEN;
 function getSlackClient(teamId) {
@@ -82,7 +84,7 @@ slackEvents.on('message', (event, body) => {
       }
 
       // Init slack client
-      const slack = getSlackClient(body.team_id);
+      slack = getSlackClient(body.team_id);
 
       // Handle initialization failure
       if (!slack) {
@@ -95,110 +97,20 @@ slackEvents.on('message', (event, body) => {
 
       // Only do stuff if we already have a Toggle object
       if (userLookup[userId].togglObj !== null) {
-
-          // Do this if the user started by writing 'start'
-          if (commands[0] === 'start') {
-              if(commands.length < 3) {
-                // Let the user and back-end know that they need to add a description.
-                let descripMsg = `:grimacing: You need to add a description before I can start a timer.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
-                console.log(descripMsg);
-                slack.chat.postMessage({ channel: event.channel, text: descripMsg }).catch(console.error);
-                return;
-              }
-              
-              fetchProject(userId, commands[1]).then((dat) => {
-                  // Save the project name and id
-                  let projectId = dat.pid,
-                      projectName = dat.pname;
-
-                  try {
-                      // Decipher what the description for the time entry should be
-                      let description = event.text.substring(event.text.indexOf(projectName) + projectName.length, event.text.length).trim();
-                      description = description.charAt(0).toUpperCase() + description.slice(1);
-                      console.log('Attempting to start time entry with description: ' + description);
-
-                      // Start the time entry
-                      userLookup[userId].togglObj.startTimeEntry({
-                          description: description,
-                          pid: projectId
-                      }, function(err, timeEntry) {
-                          // handle error
-                          if (!err) {
-                            // Let the user and back-end know that we did good.
-                            let startMsg = `Alright.\n:arrow_forward: I started a timer with the description \`` + description + `\` on the project called \`` + projectName + `\`.`;
-                            console.log(startMsg);
-                            slack.chat.postMessage({ channel: event.channel, text: startMsg }).catch(console.error);
-                          }
-                          else {
-                            console.log(err.message);
-                            // Let the user and back-end know what we can't find the project under this user
-                            let noProjectMsg = `Oh. :anguished: I don't think you can access project \`` + projectName + `\`. Go to Toggl to check if the project is public, or if you're assigned to it.`;
-                            console.log(noProjectMsg);
-                            slack.chat.postMessage({ channel: event.channel, text: noProjectMsg }).catch(console.error);
-                          }
-                      })
-                  } catch (error) {
-                      console.error(error);
-                  }
-              }).catch((err) => {
-                  console.error(err.message);
-
-                  // If the project does not exist, let the user and back-end know
-                  let projectMsg = `:thinking_face: I don't think that project is on Toggl yet.\nYou should check for typos, or go create the project on Toggl.`;
-                  if(err.projects) {
-                    projectMsg += '\nHere is a list of the projects on Toggl right now: ';
-                    for (let i = 0; i < err.projects.length; i++) {
-                      projectMsg += '`' + err.projects[i].name + '`';
-                      if(i !== err.projects.length - 1) projectMsg += ', ';
-                      else projectMsg += '.';
-                    }
-                  }
-                  console.log(projectMsg);
-                  slack.chat.postMessage({ channel: event.channel, text: projectMsg }).catch(console.error);
-              })
-          // Stop the timer, if the user writes 'stop', 'stahp' or 'stp'/'stooooop' (with as many or as few o's as they want)
-          } else if (commands[0] === 'stop' || commands[0] === 'stahp' || RegExp('sto*p').test(commands[0])) {
-              try {
-                  // First try to get the current time entry
-                  userLookup[userId].togglObj.getCurrentTimeEntry((err, timeEntry) => {
-                      if (err) throw err;
-
-                      if (timeEntry !== null) {
-                          try {
-                              // Then stop the time entry
-                              userLookup[userId].togglObj.stopTimeEntry(timeEntry.id, function(err) {
-                                  // handle error
-                                  if (err) throw err;
-
-                                  // If we were successful, let the user know
-                                  let stopMsg = `Okay then.\n:black_square_for_stop: I stopped your current timer with the description \`` + timeEntry.description + `\`.`;
-                                  console.log(stopMsg);
-                                  slack.chat.postMessage({ channel: event.channel, text: stopMsg }).catch(console.error);
-
-                                  // Don't forget to reset the important variables
-                                  clearInterval(userLookup[userId].togglReminder);
-                                  userLookup[userId].reminderCount = 0;
-                              })
-                          } catch (error) {
-                              console.error(error);
-                          }
-                      }
-                      else {
-                        // If there is no timer, then let the user and back-end know
-                        let errorMsg = `:fearful: You don't seem to have an active timer right now.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
-                        console.log(errorMsg);
-                        slack.chat.postMessage({ channel: event.channel, text: errorMsg }).catch(console.error);
-                      }
-                  })
-              } catch (error) {
-                  console.error(error);
-              }
+          // Parse the command and run the correct sequence based on that
+          let command = parseCommand(commands[0])
+          if (command === 'start') {
+            runStartSequence(event, userId, commands)
+          } else if (command === 'stop') {
+            runStopSequence(event, userId)
+          } else if (command === 'projects') {
+            fetchProject(userId, '').then((dat) => {
+              let projectsMsg = assembleProjectsMsg('', dat.projects);
+              sendThisMessage(projectsMsg, event)
+            })
           } else {
               let errorMsg = `Hmmm... :thinking_face: I don't know that command.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
-              console.log(errorMsg);
-
-              // Respond to the message back in the same channel
-              slack.chat.postMessage({ channel: event.channel, text: errorMsg }).catch(console.error);
+              sendThisMessage(errorMsg, event)
           }
       }
     }
@@ -224,9 +136,8 @@ function fetchProject(userId, txt) {
                     }
                 }
 
-                // only go further if we have a project name
-                if (projectName === undefined) {
-                    reject({message : 'Couldn\t find a project by that name.', projects : dat})
+                if (projectName === undefined || txt === '') {
+                    resolve({ message : 'Couldn\t find a project by that name.', projects : dat})
                 } else {
                     resolve({ pid: projectId, pname: projectName });
                 }
@@ -238,7 +149,123 @@ function fetchProject(userId, txt) {
     })
 }
 
-// TODO: Make a timer
+function runStartSequence(event, userId, commands) {
+
+  // CASE 1: If no description was given
+  if(commands.length < 3) {
+    // Let the user and back-end know that they need to add a description.
+    let descripMsg = `:grimacing: You need to add a description before I can start a timer.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
+    // console.log(descripMsg);
+    sendThisMessage(descripMsg, event)
+    return;
+  }
+  
+  // CASE 2: 
+  fetchProject(userId, commands[1]).then((dat) => {
+      if(dat.projects === undefined) {
+        // Save the project name and id
+        let projectId = dat.pid,
+            projectName = dat.pname;
+
+        try {
+            // Decipher what the description for the time entry should be
+            let description = parseDescription(event.text, projectName);
+
+            // Start the time entry
+            userLookup[userId].togglObj.startTimeEntry({
+                description: description,
+                pid: projectId
+            }, function(err, timeEntry) {
+                // handle error
+                if (!err) {
+                  // Let the user and back-end know that we did good.
+                  let startMsg = `Alright.\n:arrow_forward: I started a timer with the description \`` + description + `\` on the project called \`` + projectName + `\`.`;
+                  sendThisMessage(startMsg, event)
+                }
+                else {
+                  // Let the user and back-end know what we can't find the project under this user
+                  let noProjectMsg = `Oh. :anguished: I don't think you can access project \`` + projectName + `\`. Go to Toggl to check if the project is public, or if you're assigned to it.`;
+                  sendThisMessage(noProjectMsg, event)
+                }
+            })
+        } catch (error) {
+            console.error(error);
+        }
+      }
+      else {
+        let projectsMsg = assembleProjectsMsg(`:thinking_face: I don't think that project is on Toggl yet.\nYou should check for typos, or go create the project on Toggl.`, dat.projects)
+        sendThisMessage(projectsMsg, event)
+      }
+  }).catch((err) => {
+      console.error(err)
+  })
+}
+
+function runStopSequence(event, userId) {
+  try {
+      // First try to get the current time entry
+      userLookup[userId].togglObj.getCurrentTimeEntry((err, timeEntry) => {
+          if (err) throw err;
+
+          if (timeEntry !== null) {
+              try {
+                  // Then stop the time entry
+                  userLookup[userId].togglObj.stopTimeEntry(timeEntry.id, function(err) {
+                      // handle error
+                      if (err) throw err;
+
+                      // If we were successful, let the user know
+                      let stopMsg = `Okay then.\n:black_square_for_stop: I stopped your current timer with the description \`` + timeEntry.description + `\`.`;
+                      sendThisMessage(stopMsg, event)
+
+                      // Don't forget to reset the important variables
+                      clearInterval(userLookup[userId].togglReminder);
+                      userLookup[userId].reminderCount = 0;
+                  })
+              } catch (error) {
+                  // console.error(error);
+              }
+          }
+          else {
+            // If there is no timer, then let the user and back-end know
+            let errorMsg = `:fearful: You don't seem to have an active timer right now.\nTry writing \`start PROJECT_NAME DESCRIPTION\`. E.g. \`Start pillemaskinen Månedligt check-up.\``;
+            sendThisMessage(errorMsg, event)
+          }
+      })
+  } catch (error) {
+      // console.error(error);
+  }
+}
+
+function assembleProjectsMsg(prefix, projects) {
+  let projectMsg = prefix;
+  if(projects) {
+    projectMsg += '\nHere is a list of the projects on Toggl right now: ';
+    for (let i = 0; i < projects.length; i++) {
+      projectMsg += '`' + projects[i].name + '`';
+      if(i !== projects.length - 1) projectMsg += ', ';
+      else projectMsg += '.';
+    }
+  }
+  return projectMsg
+}
+
+function sendThisMessage(msg, event) {
+  slack.chat.postMessage({ channel: event.channel, text: msg }).catch(console.error);
+}
+
+function parseCommand(txt) {
+  if(txt === 'start') return 'start';
+  else if(RegExp('st.*p').test(txt)) return 'stop';
+  else if(txt === 'projects') return 'projects';
+  else return 'notfound'
+}
+
+function parseDescription(txt, projectName) {
+  let description = txt.substring(txt.indexOf(projectName) + projectName.length, txt.length).trim();
+  description = description.charAt(0).toUpperCase() + description.slice(1);
+  return description;
+}
 
 module.exports = {
     router: router,
