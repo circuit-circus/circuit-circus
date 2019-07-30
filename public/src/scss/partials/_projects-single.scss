@@ -119,6 +119,137 @@
 	}
 }
 
+.projects-single-lightbox {
+	align-items: center;
+
+	animation: 300ms ease-in-out 300ms 1 normal both running hidelightbox;
+
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	transition: all 300ms ease-in-out;
+	width: 100%;
+	z-index: 9999;
+
+	&.active {
+		animation-delay: 0s;
+		animation-name: showlightbox;
+		pointer-events: auto;
+		
+		.lightbox-container {
+			animation-delay: 400ms;
+			animation-name: showlightboximage;
+		}
+
+		.lightbox-label {
+			animation-delay: 800ms;
+			animation-name: showlightboxlabel;
+		}
+	}
+
+	img {
+		max-height: 90vh;
+		max-width: 90vw;
+	}
+
+	.lightbox-container {
+		align-items: center;
+		
+		animation: 300ms ease-in-out 0s 1 normal both running hidelightboximage;
+
+		display: flex;
+		justify-content: center;
+		left: 0;
+		position: relative;
+		top: 0;
+		z-index: 10000;
+	}
+
+	.lightbox-label {
+		animation: 300ms ease-in-out 0s 1 normal both running hidelightboxlabel;
+
+		background: #fff;
+		bottom: 20px;
+		padding: 0 1rem;
+		position: absolute;
+		right: 20px;
+	}
+}
+
+@keyframes showlightbox {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes showlightboximage {
+	0% {
+		opacity: 0;
+		transform: scale(.5);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes showlightboxlabel {
+	0% {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes hidelightbox {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes hidelightboximage {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(.5);
+	}
+}
+
+@keyframes hidelightboxlabel {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+}
+
 .projects-single-img-container .projects-single-img {
 	box-sizing: border-box;
 	margin-bottom: 5px;
@@ -127,6 +258,7 @@
 	img {
 		background-color: #00f;
 		border: 0 solid #00f;
+		cursor: pointer;
 		height: auto;
 		max-height: 512px;
 		transition: all 300ms ease-in-out;
@@ -185,7 +317,7 @@
 
 			@media screen and (max-width: 480px) {
 				left: 10px;
-				right: unset;
+				right: initial;
 			}
 		}
 

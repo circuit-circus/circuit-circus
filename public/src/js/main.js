@@ -133,6 +133,9 @@ function getSingleProject(slug, callback) {
 }
 
 function insertSingleProjectData(data) {
+    $('.lightbox-container').remove()
+    $('.projects-single-lightbox').css('display', 'none')
+
     var project = $('.projects-single-template').clone();
     project.find('.projects-single-title').text(data.project.fields.title);
     project.find('.projects-single-lead').text(data.project.fields.leadParagraph);
@@ -203,7 +206,37 @@ function insertSingleProjectData(data) {
             project.find('.projects-single-img-container').append(newImg);
         }
     }
-    console.log(project);
+
+    $('body').on('click', '.projects-single-img-container .projects-single-img img', function(e) {
+        $('.lightbox-container').remove()
+
+        var imgElem = $('<div class="lightbox-container"><img/></div>');
+        var newImg = imgElem.clone();
+
+        if($(this).siblings().length > 0) {
+            $('<span class="lightbox-label"></span>').appendTo(newImg).text($(this).siblings().text())
+        }
+
+        newImg.find('img').attr('src', e.currentTarget.src)
+        $('.projects-single-lightbox').append(newImg).addClass('active')
+
+        // Prevent lightbox from showing CSS animations when opening project
+        setTimeout(function() {
+            $('.projects-single-lightbox').css('display', 'flex')
+        }, 600)
+
+        $('.projects-single-lightbox').click(function(e) {
+            if(e.target.classList.contains('projects-single-lightbox')) {
+                $('.projects-single-lightbox').removeClass('active')
+            }
+        })
+    });
+
+    $('html').keydown(function(e) {
+        if(e.key === 'Escape') {
+            $('.projects-single-lightbox').removeClass('active')
+        }
+    })
 
     project.removeClass('projects-single-template').addClass('projects-single').attr('id', data.project.fields.slug);
     $('.projects-single-section .page-content').html(project);
