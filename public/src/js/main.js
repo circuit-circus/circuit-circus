@@ -84,6 +84,8 @@ function goToPage(target, fromMenu) {
     if( (target === 'projects') && targetSection.hasClass('not-loaded')) {
         $.ajax({
             url: '/' + target,
+            /*username: 'admin',
+            password: 'c778c7beb369a309530d03e77e9fcddb3c2305d6cca411f1e3a89c16e207d470'*/
         }).done(function(data) {
             // Sort projects
             var projectsData = data.projects.sort(compareProjectDates);
@@ -125,6 +127,8 @@ function insertProjectsData(data, targetSection) {
 function getSingleProject(slug, callback) {
     $.ajax({
         url: '/projects/' + slug,
+        /*user: 'admin',
+        password: 'c778c7beb369a309530d03e77e9fcddb3c2305d6cca411f1e3a89c16e207d470'*/
     }).done(function(data) {
         insertSingleProjectData(data);
         toggleLoading(false);
