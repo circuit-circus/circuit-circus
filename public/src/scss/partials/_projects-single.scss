@@ -122,7 +122,7 @@
 .projects-single-lightbox {
 	align-items: center;
 
-	animation: 300ms ease-in-out 300ms 1 normal both running hidelightbox;
+	animation: 300ms ease-in-out 1300ms 1 normal both running hidelightbox;
 
 	background: rgba(0, 0, 0, 0.5);
 	display: none;
@@ -143,12 +143,12 @@
 		pointer-events: auto;
 		
 		.lightbox-container {
-			animation-delay: 400ms;
+			animation-delay: 350ms;
 			animation-name: showlightboximage;
 		}
 
 		.lightbox-label {
-			animation-delay: 800ms;
+			animation-delay: 1350ms;
 			animation-name: showlightboxlabel;
 		}
 	}
@@ -161,11 +161,13 @@
 	.lightbox-container {
 		align-items: center;
 		
-		animation: 300ms ease-in-out 0s 1 normal both running hidelightboximage;
-
+		animation: 1000ms ease-in-out 0s 1 normal both running hidelightboximage;
 		display: flex;
 		justify-content: center;
 		left: 0;
+		mask: url(../../../images/squiggle.svg);
+		mask-position: center;
+		mask-repeat: no-repeat;
 		position: relative;
 		top: 0;
 		z-index: 10000;
@@ -194,13 +196,13 @@
 
 @keyframes showlightboximage {
 	0% {
-		opacity: 0;
-		transform: scale(.5);
+		mask-size: 1px;
+		// transform: scale(0) rotateX(360deg);
 	}
 
 	100% {
-		opacity: 1;
-		transform: scale(1);
+		mask-size: 2500%;
+		// transform: scale(1) rotateX(0deg);
 	}
 }
 
@@ -228,13 +230,13 @@
 
 @keyframes hidelightboximage {
 	0% {
-		opacity: 1;
-		transform: scale(1);
+		// transform: scale(1) rotateX(0deg);
+		mask-size: 2500%;
 	}
 
 	100% {
-		opacity: 0;
-		transform: scale(.5);
+		// transform: scale(0) rotateX(360deg);
+		mask-size: 1px;
 	}
 }
 
