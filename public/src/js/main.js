@@ -261,9 +261,29 @@ function getSinglePage(slug, callback) {
 }
 
 function insertSinglePageData(data) {
+
     var project = $('.page-single-template').clone();
     project.find('.page-single-body').html(marked(data.page.fields.body));
     project.removeClass('page-single-template').addClass('page-single').attr('id', data.page.fields.slug);
+
+    // If we're on the about page, add the member profile references
+    // if(data.page.fields.slug == 'about' && (data.page.fields.references && data.page.fields.references.length > 0)) {
+
+    //     data.page.fields.references.forEach(function(element) {
+    //         console.log(element.fields.memberImage.fields.file.url);
+    //         var profile = $('.members-profile-item-container--template').clone();
+
+    //         profile.find('.members-profile-image').css('background-image', 'url(' + element.fields.memberImage.fields.file.url + ')');
+    //         profile.find('.members-profile-name').text(element.fields.memberName);
+    //         profile.find('.members-profile-description').html(marked(element.fields.memberDescription));
+
+    //         profile.removeClass('members-profile-item-container--template').addClass('members-profile-item-container');
+
+    //         project.find('.members-profile-container').append(profile);
+    //     })
+
+
+    // }
 
     $('.page-single-section .page-content').html(project);
     $('.page-single-section').removeClass('not-loaded').addClass('loaded').scrollTop(0);
