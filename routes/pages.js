@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     }
     // If not, redirect to main page
     else {
-        res.redirect(req.headers.host)
+        res.redirect('http://' + req.headers.host)
     }
 });
 

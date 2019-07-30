@@ -9,13 +9,12 @@ router.get('/', function(req, res, next) {
             'content_type': 'project'
         })
         .then(function (entries) {
-            //res.render('pages/projects', { projects: entries.items });
             res.send({projects: entries.items});
         });
     }
     // If not, redirect to main page
     else {
-        res.redirect(req.headers.host)
+        res.redirect('http://' + req.headers.host)
     }
 });
 
