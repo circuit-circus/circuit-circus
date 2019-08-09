@@ -1,0 +1,35 @@
+[data-id="activities"] {
+    .page-content {
+        padding-bottom: 2rem;
+    }
+
+    h3 {
+        background: #00f;
+        color: #fff;
+        display: inline-block;
+        font-size: 1rem;
+        letter-spacing: 3px;
+        margin-bottom: 0;
+        padding: 0 .5rem;
+    }
+
+    .activity-year-divider {
+        li:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.activities-list-item {
+    list-style-image: url('images/icons/eyes.png');
+    margin: 1rem 0;
+
+    .activities-item-date {
+        display: block;
+        font-size: .75rem;
+    }
+
+    &.template {
+        display: none;
+    }
+}

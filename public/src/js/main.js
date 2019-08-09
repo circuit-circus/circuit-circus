@@ -84,12 +84,42 @@ function goToPage(target, fromMenu) {
     if( (target === 'projects') && targetSection.hasClass('not-loaded')) {
         $.ajax({
             url: '/' + target,
-            /*username: 'admin',
-            password: 'c778c7beb369a309530d03e77e9fcddb3c2305d6cca411f1e3a89c16e207d470'*/
         }).done(function(data) {
             // Sort projects
-            var projectsData = data.projects.sort(compareProjectDates);
+            var projectsData = data.projects.sort(function(a, b) {
+                const openingA = a.fields.openingDate;
+                const openingB = b.fields.openingDate;
+
+                var comparison = 0;
+                if (openingA > openingB) {
+                  comparison = 1;
+                } else if (openingA < openingB) {
+                  comparison = -1;
+                }
+                return comparison * -1;
+            });
             insertProjectsData(projectsData, targetSection);
+            toggleLoading(false);
+        });
+    }
+    else if( (target === 'activities') && targetSection.hasClass('not-loaded')) {
+        $.ajax({
+            url: '/' + target,
+        }).done(function(data) {
+            // Sort projects
+            var activityData = data.pages.sort(function(a, b) {
+                const openingA = a.fields.date;
+                const openingB = b.fields.date;
+
+                var comparison = 0;
+                if (openingA > openingB) {
+                  comparison = 1;
+                } else if (openingA < openingB) {
+                  comparison = -1;
+                }
+                return comparison * -1;
+            });
+            insertActivityData(activityData, targetSection);
             toggleLoading(false);
         });
     }
@@ -119,6 +149,34 @@ function insertProjectsData(data, targetSection) {
         string = string.repeat(200);
         thisBgContainer.html(string);
         bgContainer.after(thisBgContainer);
+    });
+
+    targetSection.removeClass('not-loaded').addClass('loaded');
+}
+
+// Insert projects data
+function insertActivityData(data, targetSection) {
+    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var bgContainer = $('.background-container');
+    var addedYears = [];
+
+    data.forEach(function(element) {
+        var listItem = $(targetSection).find('li.template').clone();
+        $(listItem).find('.activities-item-title').text(element.fields.title)
+        $(listItem).find('.activities-item-descrip').text(element.fields.description);
+        var itemDate = new Date(element.fields.date);
+        var itemYear = itemDate.getUTCFullYear();
+        var dateStr = (monthNames[itemDate.getUTCMonth()]) + ', ' + (itemYear);
+        $(listItem).find('.activities-item-date').text(dateStr);
+        $(listItem).removeClass('template');
+        $(targetSection).find('.page-content').append(listItem);
+        if(!addedYears.includes(itemYear)) {
+            console.log(itemYear)
+            $(listItem).addClass('activity-year-' + itemYear);
+            $(listItem).before('<h3>' + itemYear + '</h3>');
+            $(listItem).wrapAll('<div class="activity-year-divider"></div>');
+            addedYears.push(itemYear);
+        }
     });
 
     targetSection.removeClass('not-loaded').addClass('loaded');
