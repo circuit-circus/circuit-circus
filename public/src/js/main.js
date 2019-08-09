@@ -102,7 +102,7 @@ function goToPage(target, fromMenu) {
             toggleLoading(false);
         });
     }
-    else if( (target === 'activities') && targetSection.hasClass('not-loaded')) {
+    else if( (target === 'timeline') && targetSection.hasClass('not-loaded')) {
         $.ajax({
             url: '/' + target,
         }).done(function(data) {

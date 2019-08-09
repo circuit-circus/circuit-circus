@@ -1,4 +1,24 @@
-[data-id="activities"] {
+[data-id="timeline"] {
+    header {
+        margin-bottom: 1rem;
+        padding-bottom: .5rem;
+        position: relative;
+
+        p {
+            margin-top: 1rem;
+        }
+
+        &::after {
+            background: #00f;
+            bottom: 0;
+            content: '';
+            height: 5px;
+            left: 0;
+            position: absolute;
+            width: 5rem;
+        }
+    }
+
     .page-content {
         padding-bottom: 2rem;
     }
@@ -36,7 +56,7 @@
 
             span {
                 color: #00f;
-                padding: 0rem .5rem;
+                padding: 0.1rem .5rem;
             }
         }
 

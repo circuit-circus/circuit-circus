@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 var index = require('./routes/index.js');
 var projects = require('./routes/projects.js');
 var pages = require('./routes/pages.js');
-var activities = require('./routes/activities.js');
+var timeline = require('./routes/timeline.js');
 //var workshops = require('./routes/workshops.js');
 var rerouter = require('./routes/rerouter.js');
 var togglbot = require('./routes/togglbot.js');
@@ -26,7 +26,7 @@ app.use('/', index);
 app.use('/togglbot', togglbot.router);
 app.use('/projects', projects);
 app.use('/pages', pages);
-app.use('/activities', activities);
+app.use('/timeline', timeline);
 //app.use('/workshops', workshops);
 app.use('/', rerouter);
 
