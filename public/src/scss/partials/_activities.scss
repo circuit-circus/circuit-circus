@@ -3,17 +3,43 @@
         padding-bottom: 2rem;
     }
 
-    h3 {
-        background: #00f;
-        color: #fff;
-        display: inline-block;
-        font-size: 1rem;
-        letter-spacing: 3px;
-        margin-bottom: 0;
-        padding: 0 .5rem;
-    }
-
     .activity-year-divider {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-bottom: .5rem;
+        position: relative;
+
+        &::after {
+            background: transparent;
+            border: 1px solid #00f;
+            bottom: 0;
+            content: '';
+            display: block;
+            font-size: 1rem;
+            height: 100%;
+            left: -2rem;
+            position: absolute;
+            top: 0;
+            transition: all 300ms ease-in-out;
+            width: 1rem;
+        }
+
+        &:hover::after {
+            background: #00f;
+        }
+
+        h3 {
+            letter-spacing: 2px;
+            margin-right: 1rem;
+
+            span {
+                color: #00f;
+                padding: 0rem .5rem;
+            }
+        }
+
         li:first-child {
             margin-top: 0;
         }
@@ -21,10 +47,10 @@
 }
 
 .activities-list-item {
-    list-style-image: url('images/icons/eyes.png');
+    list-style: none;
     margin: 1rem 0;
 
-    .activities-item-date {
+    .activities-item-meta {
         display: block;
         font-size: .75rem;
     }

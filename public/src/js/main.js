@@ -166,16 +166,20 @@ function insertActivityData(data, targetSection) {
         $(listItem).find('.activities-item-descrip').text(element.fields.description);
         var itemDate = new Date(element.fields.date);
         var itemYear = itemDate.getUTCFullYear();
-        var dateStr = (monthNames[itemDate.getUTCMonth()]) + ', ' + (itemYear);
+        var dateStr = (monthNames[itemDate.getUTCMonth()])/* + ', ' + (itemYear)*/;
         $(listItem).find('.activities-item-date').text(dateStr);
+        $(listItem).find('.activities-item-location').text(element.fields.location);
         $(listItem).removeClass('template');
         $(targetSection).find('.page-content').append(listItem);
+        $(listItem).addClass('activity-year-' + itemYear);
+
         if(!addedYears.includes(itemYear)) {
-            console.log(itemYear)
-            $(listItem).addClass('activity-year-' + itemYear);
-            $(listItem).before('<h3>' + itemYear + '</h3>');
-            $(listItem).wrapAll('<div class="activity-year-divider"></div>');
+            $(listItem).wrap('<div class="activity-year-divider divider-' + itemYear + '"><ul></ul></div>');
+            $('.divider-' + itemYear).prepend('<h3><span>' + itemYear + '</span></h3>');
             addedYears.push(itemYear);
+        }
+        else {
+            $(listItem).appendTo($('.divider-' + itemYear + ' ul'));
         }
     });
 
