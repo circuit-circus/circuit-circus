@@ -175,7 +175,7 @@ function insertActivityData(data, targetSection) {
 
         if(!addedYears.includes(itemYear)) {
             $(listItem).wrap('<div class="activity-year-divider divider-' + itemYear + '"><ul></ul></div>');
-            $('.divider-' + itemYear).prepend('<h3><span>' + itemYear + '</span></h3>');
+            $('.divider-' + itemYear).prepend('<h3>' + itemYear + '</h3>');
             addedYears.push(itemYear);
         }
         else {
