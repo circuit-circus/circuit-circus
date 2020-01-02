@@ -2,6 +2,12 @@
 	display: none;
 }
 
+.page-single {
+	p {
+		margin-bottom: 1rem;
+	}
+}
+
 .active .page-single {
 	animation: fadein 1s ease-in-out;
 }

@@ -1,33 +1,59 @@
-.projects-list-item {
-    width: 90%;
-    max-width: 700px;
-    margin: 0 auto 4rem;
+.page-section[data-id='projects'] {
+	.page-content {
+        
+        display: flex;
+        align-content: space-between;
+        flex-wrap: wrap;
+	}
+}
 
-    //overflow: hidden;
-    vertical-align: top;
+
+.projects-list-item {
+    
 
     background-color: #fff;
-    text-align: justify;
+    text-align: center;
 
+    width: calc(50% - 50px);
     
-    @for $i from 1 through 8 {
-        &:nth-child(#{$i}) {
-            transform: rotate(#{random(10) - 5}deg);
+    &:nth-of-type(odd) {
+        margin-right: 100px;
+    }
+
+    &:nth-of-type(3),
+    &:nth-of-type(5) {
+        margin-top: 2rem;
+    }
+
+    @media screen and (max-width: 1250px) {
+        width: calc(50% - 25px);
+        
+        &:nth-of-type(odd) {
+            margin-right: 50px;
         }
     }
 
-    @media screen and (max-width: 480px) {
-        margin-bottom: 2rem;
+    @media screen and (max-width: 700px) {
+        width: calc(50% - 15px);
+        
+        &:nth-of-type(odd) {
+            margin-right: 30px;
+        }
+    }
+
+
+    .projects-item-permalink {
+        text-decoration: none;
     }
 
     .projects-item-cover-image {
-        width: 120%;
-        padding-bottom: 50%;
-        background-size: contain;
+        //width: 120%;
+        padding-bottom: 60%;
+        background-size: cover;
         background-position: center center;
 
         position: relative;
-        left: -10%;
+        //left: -10%;
 
         background-color: #eaeaea;
 
@@ -37,18 +63,16 @@
     }
 
     .projects-item-title {
-        position: relative;
-        //top: -25px;
-        //background: #ffffff;
-        color: #0000ff;
-        //padding: 5px 20px 0;
-        display: inline-block;
-        max-width: 90%;
         
         letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 700;
-        font-size: 2em;
+        
+        color:  #000;
+
+        padding: 0.5rem 1rem;
+
+        font-size: 22px;
         //margin: 1rem 0;
         //padding-top: 2rem;
 
@@ -62,30 +86,16 @@
         //     top: -1rem;
         // }
 
-        &:before {
-            content: '';
-            display: inline-block;
-            color: black;
-            position: relative;
-        }
 
     }
 
     .projects-item-paragraph {
-        font-size: 16px;
-        //padding: 0px 20px;
-        position: relative;
-        //text-transform: uppercase;
-        //font-family: 'Work Sans';
+        
         line-height: 1.8rem;
-        text-align: justify;
         width: 100%;
 
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-weight: 600;
-        font-size: 2em;
-        font-family: 'Montserrat', sans-serif;
+        color: #000;
+        padding: 0.5rem 1rem;
 
         @media screen and (max-width: 480px) {
             font-size: 16px;

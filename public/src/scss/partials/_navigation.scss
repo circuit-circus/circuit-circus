@@ -1,18 +1,8 @@
-@keyframes jumpy {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-         transform: translateY(-10px);
-    }
-    100% {
-         transform: translateY(0px);
-    }
-}
+
 
 nav {
     text-align: center;
-    padding: 1rem;
+    padding: 2rem;
     z-index: 10;
     position: fixed;
     top: 0;
@@ -21,64 +11,36 @@ nav {
     height: $nav-height;
     pointer-events: none;
 
-    #nav-logo {
-        width: 100px;
-        height: 100px;
-        display: inline-block;
-        margin: 0 auto;
-        transform: scale(1);
-        transition: transform 500ms ease-in-out;
-
-        &:hover {
-            transform: scale(1.05);
+    &.black-bg {
+        #nav-logo {
+            filter: saturate(0) invert(100%);
         }
 
-        &.logo-white {
-            filter: saturate(0) invert(100%);
+        .nav-item span {
+            color: #fff;
         }
     }
 
-
     .nav-item {
-        box-sizing: border-box;
         text-decoration: none;
         text-transform: uppercase;
         letter-spacing: 2px;
         font-size: 12px;
         position: relative;
-        margin: 0 5px;
+        margin: 0;
         pointer-events: auto;
-        display: inline-block;
+        float: left;
        
         font-weight: 700;
+        width: 25%;
 
         @media screen and (max-width: 412px) {
             margin-bottom: 10px;
             top: -10px;
         }
-
-        &:first-of-type {
-            padding: 0;
-            @media screen and (max-width: 412px) {
-                top: 0px;
-            }
-        }
-
-        &:nth-child(3) {
-            animation: jumpy 2s ease-in-out 0s infinite running;
-        }
-        &:nth-child(4) {
-            animation: jumpy 2s ease-in-out .5s infinite running;
-        }
-        &:nth-child(5) {
-            animation: jumpy 2s ease-in-out 1s infinite running;
-        }
-        &:nth-child(6) {
-            animation: jumpy 2s ease-in-out 1.5s infinite running;
-        }
-
+        
         span {
-            background-color: #fff;
+            color: #000;
             display: inline-block;
             padding: 0.5rem;
             transform: rotate(0deg);
@@ -99,5 +61,25 @@ nav {
         &:not(:first-of-type):hover.active span {
             transform: rotate(235deg);
         }
+    }
+}
+
+#nav-logo {
+    width: 100px;
+    margin: 0 auto;
+}
+
+#cc-logo {
+    width: 80px;    
+    height: 80px;
+    
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+nav.black-bg {
+    #cc-logo {
+        filter: saturate(0) invert(100%);
     }
 }
