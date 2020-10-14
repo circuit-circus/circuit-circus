@@ -23,15 +23,13 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
     line-height: 1.75;
 }
 
 h1 {
-    color: #0000ff;
     font-weight: 900;
-    font-size: 12rem;
-    letter-spacing: 2px;
+    font-size: 7.5rem;
     line-height: 1;
     margin-bottom: 0;
     word-break: break-word;
@@ -46,11 +44,9 @@ h1 {
 }
 
 h2 {
-    color: #0000ff;
     font-weight: 900;
     font-size: 4rem;
     line-height: 1;
-    letter-spacing: 1px;
     word-break: break-word;
 
     @media screen and (max-width: 480px) {
@@ -69,9 +65,10 @@ a {
 }
 
 p {
-    font-family: 'Open Sans', Helvetica, sans-serif;
-    letter-spacing: 1px;
+    font-family: 'Roboto Mono', Helvetica, sans-serif;
     margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 12px;
 
     a {
         color: #0000ff;
@@ -87,7 +84,7 @@ button {
     border-style: solid;
     border-width: 0 0 2px 0;
     color: #00f;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
     font-weight: bold;
     padding-bottom: 2px;
     position: relative;

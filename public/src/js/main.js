@@ -39,28 +39,34 @@ $(document).ready(function () {
 
 function goToCurrentPage() {
     var hash = window.location.hash;
+    var currentPage = hash.substring(1, hash.length);
     if(hash == '') {
         hash = "#home";
+        currentPage = 'home'
     }
-    var currentPage = hash.substring(1, hash.length);
-
     $('#nav-logo').removeClass('logo-white');
 
     if(currentPage.includes('pages/')) {
         var currentProject = currentPage.substring('pages/'.length, currentPage.length);
         toggleLoading(true);
+        $('body').attr('page', currentProject);
         getSinglePage(currentProject, showSinglePage);
         goToPage(currentPage, false);
     }
-    else if(currentPage.indexOf('projects/') === -1) {
-        toggleLoading(true);
-        goToPage(currentPage, false);
-    }
-    else {
+    else if(currentPage.includes('projects/')) {
         var currentProject = currentPage.substring('projects/'.length, currentPage.length);
         toggleLoading(true);
+        $('body').attr('page', 'project');
         goToPage('projects', false);
         getSingleProject(currentProject, showSingleProject);
+    } else if(currentPage == 'projects') {
+        toggleLoading(true);
+        $('body').attr('page', 'projects');
+        goToPage(currentPage, false);
+    } else if(currentPage == 'home') {
+        toggleLoading(true);
+        $('body').attr('page', 'home');
+        goToPage(currentPage, false);
     }
 }
 
@@ -108,17 +114,11 @@ function insertProjectsData(data, targetSection) {
         if(element.fields.coverMedia && element.fields.coverMedia.fields.file.url) { // Make better check
             $(article).find('.projects-item-cover-image').css('background-image', 'url(' + element.fields.coverMedia.fields.file.url + '?w=1024)');
         }
-        $(article).find('.projects-item-title').text(element.fields.title)
+        $(article).find('.projects-item-title').text(element.fields.title);
+        $(article).find('.projects-item-year').text(element.fields.years);
         $(article).find('.projects-item-paragraph').text(element.fields.leadParagraph);
         $(article).removeClass('template');
         $(targetSection).find('.page-content').append(article);
-
-        var thisBgContainer = bgContainer.clone();
-        thisBgContainer.attr('data-name', element.fields.title);
-        var string = element.fields.title + ' '; // Convert to string
-        string = string.repeat(200);
-        thisBgContainer.html(string);
-        bgContainer.after(thisBgContainer);
     });
 
     targetSection.removeClass('not-loaded').addClass('loaded');

@@ -21,10 +21,9 @@
 .projects-single-title {
 	margin-bottom: 40px;
 	word-wrap: break-word;
-	text-transform: uppercase;
-    letter-spacing: .5rem;
-	font-weight: 700;
-	font-size: 8rem;
+	font-weight: 400;
+	font-size: 16px;
+	letter-spacing: 2px;
 }
 
 .projects-single-lead {
@@ -37,6 +36,7 @@
 	position: relative;
 	transition: all 300ms ease-in-out;
 }
+
 
 .page-content p a::before {
 	background: transparent;
@@ -297,7 +297,6 @@
 		background-color: #fff;
 		padding: 2px 7px;
 		font-size: 10px;
-		letter-spacing: 1px;
 	}
 
 	&:nth-child(odd) {

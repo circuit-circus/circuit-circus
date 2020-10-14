@@ -1,14 +1,3 @@
-@keyframes jumpy {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-         transform: translateY(-10px);
-    }
-    100% {
-         transform: translateY(0px);
-    }
-}
 
 nav {
     text-align: center;
@@ -22,8 +11,8 @@ nav {
     pointer-events: none;
 
     #nav-logo {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
         display: inline-block;
         margin: 0 auto;
         transform: scale(1);
@@ -43,18 +32,19 @@ nav {
         box-sizing: border-box;
         text-decoration: none;
         text-transform: uppercase;
-        letter-spacing: 2px;
         font-size: 12px;
+        letter-spacing: 2px;
         position: relative;
-        margin: 0 5px;
+        margin: 0 1rem;
         pointer-events: auto;
         display: inline-block;
        
         font-weight: 700;
 
-        @media screen and (max-width: 412px) {
+        @media screen and (max-width: 485px) {
             margin-bottom: 10px;
             top: -10px;
+            margin: 0 2px;
         }
 
         &:first-of-type {
@@ -64,22 +54,7 @@ nav {
             }
         }
 
-        &:nth-child(3) {
-            animation: jumpy 2s ease-in-out 0s infinite running;
-        }
-        &:nth-child(4) {
-            animation: jumpy 2s ease-in-out .5s infinite running;
-        }
-        &:nth-child(5) {
-            animation: jumpy 2s ease-in-out 1s infinite running;
-        }
-        &:nth-child(6) {
-            animation: jumpy 2s ease-in-out 1.5s infinite running;
-        }
-
         span {
-            background-color: #fff;
-            display: inline-block;
             padding: 0.5rem;
             transform: rotate(0deg);
 
@@ -99,5 +74,12 @@ nav {
         &:not(:first-of-type):hover.active span {
             transform: rotate(235deg);
         }
+    }
+}
+
+body[page='about'] {
+    .nav-item {
+        color: #fff;
+        transition: 0.2s ease;
     }
 }

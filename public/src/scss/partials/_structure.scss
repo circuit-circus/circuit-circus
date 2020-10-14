@@ -26,19 +26,16 @@
     &[data-id='home'] {
         .page-content {
             text-align: center;
-            max-width: 1000px;
-            top: 0;
+            width: 90%;
+            max-width: 90%;
+            top: 170px;
 
             h1 {
-                margin: 3rem 0 2rem;
-
-                @media screen and (max-width: 1024px) {
-                    margin: 10rem 0 2rem;
-                }
+                margin: 0 0 4rem;
             }
 
             h2 {
-                font-size: 8rem;
+                font-size: 6rem;
 
                 @media screen and (max-width: 1024px) {
                     font-size: 5rem;
@@ -60,8 +57,9 @@
     &[data-id='projects'] {
 
         .page-content {
-            max-width: 100vw;
-            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
     }
 
@@ -97,7 +95,7 @@
 
     .page-content {
         position: relative;
-        top: 220px;
+        top: 170px;
         left: 0;
         right: 0;
         width: 85%;
